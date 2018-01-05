@@ -1,0 +1,38 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+</head>
+<body>
+ 
+<div style="margin: 50px 50px">
+<label for="product_search">Product Search: </label>
+<input id="product_search" type="text" data-provide="typeahead" />
+</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="../../public/js/bootstrap3-typeahead.js"></script>
+<script>
+   var $input = $("#product_search");
+   $input.typeahead({
+     source: [
+       {id: "someId1", name: "Display name 1"},
+       {id: "someId2", name: "Display name 2"}
+     ],
+     autoSelect: true
+   });
+   $input.change(function() {
+     var current = $input.typeahead("getActive");
+     if (current) {
+       // Some item from your model is active!
+       if (current.name == $input.val()) {
+         // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
+       } else {
+         // This means it is only a partial match, you can either add a new item
+         // or take the active if you don't want new items
+       }
+     } else {
+       // Nothing is active so it is a new value (or maybe empty value)
+     }
+   });
+</script>
+</body>
+</html>

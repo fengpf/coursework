@@ -178,23 +178,19 @@
                 </div>
 
                   
-                  <div class="col-sm-6">
-                      <label for="InputName"></br>Organisation</label>
-                      {{--<select id="sel_org" name="organisation">--}}
-                          {{--  <option value=""></option>  --}}
-                      <input id="product_search" class="form-control form-control-sm" type="text" data-provide="typeahead">
-                             {{--data-source='["Deluxe Bicycle", "Super Deluxe Trampoline", "Super Duper Scooter"]'>--}}
-                      {{--</select>--}}
-                 </div>
-                  <div class="col-sm-6">
+                <div class="col-sm-6">
+                      <label for="org_search"></br>Organisation</label>
+                      <input id="org_search" class="form-control form-control-sm" type="text" data-provide="typeahead">
+                </div>
+                <div class="col-sm-6">
                       <label for="InputName"></br>Department Level 1</label>
                       <input name="departmentLevel1" class="form-control form-control-sm" id="InputName" type="text"  >
-                          </div>
-                  <div class="col-sm-6">
+                 </div>
+                <div class="col-sm-6">
                       <label for="InputName"></br>Department Level 2</label>
                       <input name="departmentLevel2"  class="form-control form-control-sm" id="InputName" type="text" >
-                          </div>
-                  </div>
+                 </div>
+             </div>
               
               <div class="form-row">
                   <div class="col-sm-4">
@@ -341,27 +337,26 @@
      <!--<script src="js/sb-admin.min.js"></script>-->
     <!-- Custom scripts for this page-->
     <!--<script src="js/sb-admin-datatables.min.js"></script>-->
-    <script src="https://cdn.bootcss.com/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
-    {{--<script src="js/bootstrap3-typeahead.js"></script>--}}
+   <script src="js/bootstrap3-typeahead.js"></script>
     <script>
         $('.chosen-select').chosen();
     </script>
 
-        <script>
-            $(document).ready(function($) {
-                // Workaround for bug in mouse item selection
-//                $.fn.typeahead.Constructor.prototype.blur = function() {
-//                    var that = this;
-//                    setTimeout(function () { that.hide() }, 250);
-//                };
-//                console.log(1111111111)
-//                $('#product_search').typeahead({
-//                    source: function(query, process) {
-//                        return ["Deluxe Bicycle", "Super Deluxe Trampoline", "Super Duper Scooter"];
-//                    }
-//                });
-            })
-        </script>
+    <script>
+        $(document).ready(function($) {
+            $.fn.typeahead.Constructor.prototype.blur = function() {
+                var that = this;
+                setTimeout(function () { that.hide() }, 250);
+            };
+            $('#org_search-test').typeahead({
+                source: [
+                  {id: "someId1", name: "Display name 1"},
+                  {id: "someId2", name: "Display name 2"}
+                ],
+                autoSelect: true
+            });
+       })
+   </script>
     <script>
      // match region country.
      $("#postcode").change(function(){
@@ -387,68 +382,41 @@
             }
          });
       });
-      // match org name.
-      function match_org(name){
-        
-      }
 
-      $(function() {
-        var name='';
-        $('#sel_org').comboSelect();
-        name=  $('#sel_org option:selected') .val();//选中的值
-        if (name == ""){
-           console.log("organisation is empty");
-           return false;
-        }
-        console.log(name);
-        $('#sel_org').change(function(){  
-            $.ajax({
-                type: "GET",
-                url: "<?php echo url('/'); ?>/match_org_name",
-                data: {name:name},
-                dataType: "json",
-                timeout : 1000,
-                success: function(data){
-                    if (data.code==0) {
-                       console.log(data);
-                    } else {
-                       window.location.href="<?php echo url('/'); ?>/organisation"; 
+      $(document).ready(function($) {
+        // Workaround for bug in mouse item selection
+        $.fn.typeahead.Constructor.prototype.blur = function() {
+           var that = this;
+           setTimeout(function () { that.hide() }, 250);
+        };
+      
+        console.log(1111111111)
+        $('#org_search').typeahead({
+            source: function (query, process) {
+                $.ajax({
+                    type: "GET",
+                    url: "<?php echo url('/'); ?>/match_org_name",
+                    data: {name:query},
+                    dataType: "json",
+                    timeout : 1000,
+                    success: function(data){
+                        console.log(data);
+                        if (data.code == 0 && data.data.length != 0) {
+                           return process(data.data);
+                        }
+                        window.location.href="<?php echo url('/'); ?>/organisation"; 
+                    },
+                    error:function() {
+                       console.log("request error");
                     }
-            },
-            error:function() {
-                console.log("request error");
+                });
             }
-            });
         });
-        
-      });
+     })
 
+     
 
-     {{--$('#product_search').typeahead({--}}
-         {{--source: function (query, process) {--}}
-             {{--var parameter = {query: query};--}}
-             {{--$.post('@Url.Action("AjaxService")', parameter, function (data) {--}}
-                 {{--process(data);--}}
-             {{--});--}}
-         {{--}--}}
-     {{--});--}}
     </script>
-        {{--<script>--}}
-            {{--$(document).ready(function($) {--}}
-                {{--// Workaround for bug in mouse item selection--}}
-                {{--$.fn.typeahead.Constructor.prototype.blur = function() {--}}
-                    {{--var that = this;--}}
-                    {{--setTimeout(function () { that.hide() }, 250);--}}
-                {{--};--}}
-
-                {{--$('#product_search').typeahead({--}}
-                    {{--source: function(query, process) {--}}
-                        {{--return ["Deluxe Bicycle", "Super Deluxe Trampoline", "Super Duper Scooter"];--}}
-                    {{--}--}}
-                {{--});--}}
-            {{--})--}}
-        {{--</script>--}}
-
   </div>
   </div>
 </body>

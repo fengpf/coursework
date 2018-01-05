@@ -124,16 +124,15 @@ class OrganisationController extends Controller
     public function match_org_name(Request $request) {
         $name = trim($request->get('name'));
         $res = DB::table('organisation')
-        ->where('name', '=', $name)
-        ->first();
+        ->where('name', 'like', '%'.$name.'%')
+        ->get();
         // var_dump($res,$name);die;
         $data = [];
+        $data['data']=$res;
         if (!empty($res)) {
            $data['code']=0;
-           $data['name']=$res->name;
         } else {
             $data['code']=-1;
-            $data['name']='no this name';
         }
         echo json_encode($data);
     }
