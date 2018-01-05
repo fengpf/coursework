@@ -37,7 +37,7 @@ Route::get('match_org_name', 'OrganisationController@match_org_name');
 
 
 //search
-Route::post('search', 'SearchController@search');
+Route::get('search', 'SearchController@search');
 Route::get('searchreturn', 'SearchController@search');
 Route::get('search_flush', 'SearchController@search_flush');
 Route::post('search_admin', 'SearchController@search_admin');

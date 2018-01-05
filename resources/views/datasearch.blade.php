@@ -8,11 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>Grodata Solutions</title>
-  
-  
-  
-  <link href="css/bootstrap-dropselect.css" rel="stylesheet">
-      <script src="js/bootstrap-dropselect.js"></script>
+  <link href="css/bootstrap-select.css" rel="stylesheet">
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -54,23 +50,22 @@
                     </label>
                 </div>
                 
-                
-                
                 <div class="form-row">
                     <label class="col-sm-2">
                         </br></br>Record Type
                     </label>
                     <label class="text-center col-sm-1">
-                        </br></br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="recordtype">
+                        </br></br><input class="form-check-input position-static" type="checkbox" id="recordtype" value="recordtype">
                     </label>
                     <div class="col-sm-3 offset-sm-1">
-                    </br></br><input  class="form-control form-control-sm col-sm-12 offset-sm-3">
+                    </br></br><input  id="entry_recordtype" class="form-control form-control-sm col-sm-12 offset-sm-3">
                     </div>
                     <div class="col-sm-2 offset-sm-1 text-center">
-                        </br></br><input  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br></br><input id="noentry_recordtype"  class="form-control form-control-sm col-sm-12 offset-sm-2">
                     </div>
                     <div class="col-sm-2 text-center">
-                        </br></br><select name="dataTable_length" aria-controls="dataTable">
+                        </br></br>
+                        <select id="con_recordtype" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
@@ -113,7 +108,7 @@
                     </div>
                     <div class="col-sm-3 offset-sm-1 ">
                         </br>
-                            <select name="recordstatus" class="chosen-select " multiple>
+                            <select name="recordstatus" class="chosen-select " multiple />
                             <option value="deceased">Deceased</option>
                             <option value="left-retired">Left-Retired</option>
                             <option value="left-other">Left-Other</option>
@@ -515,8 +510,8 @@
                             <option value="not">not</option>
                         </select>
                     </div>
-                </div>
-                <div class="form-row">
+            </div>
+            <div class="form-row">
                     <label class="col-sm-2">
                         </br>School Higher Age
                     </label>
@@ -536,8 +531,8 @@
                             <option value="not">not</option>
                         </select>
                     </div>
-                </div>
-                <div class="form-row">
+            </div>
+            <div class="form-row">
                     <label class="col-sm-2">
                         </br>School URN
                     </label>
@@ -557,31 +552,41 @@
                             <option value="not">not</option>
                         </select>
                     </div>
-                </div>
-
-
-
-
-
-            
-
-
-
-
-
-
-            <div class="form-row">
-                <div class="col-md-6">
-            </br><a href="searchreturn.html" class="btn btn-primary" role="button">Search</a>
-                </div>
             </div>
             <div class="form-row">
                 <div class="col-md-6">
-                    </br><a href="" class="btn btn-primary" role="button">Export</a>
+                    <button onclick="search()" type="button" class="btn btn-primary">Search</button>
                 </div>
+            </div><br/><br/>
+
+            <div class="table-responsive">
+                    <table class="table table-bordered" id="search-result" width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Instruction</th>
+                          <th>Job Title</th>
+                          <th>Person Type</th>
+                          <th>Professional Interests</th>
+                          <th>Organisation</th>
+                          <th>Department Level 1</th>
+                          <th>Department Level 2</th>
+                          <th>OrgType</th>
+                          <th>Country</th>
+                          <th>Region</th>
+                          <th>Edit</th>
+                          <th>Del</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
             </div>
+
+            <div class="col-md-6">
+                 <button onclick="csv()" type="button" class="btn btn-primary">Export</button>
+            </div>
+
         </div>
-        
       </div>
     </div>
     </div>
@@ -612,10 +617,12 @@
       </div>
     </div>
     <!-- Bootstrap core JavaScript-->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+   <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <!-- Bootstrap core JavaScript-->
+    <script src="js/bootstrap-select.js"></script>
     <script src="js/chosen.jquery.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
@@ -628,9 +635,59 @@
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+    <script type="text/javascript" src="js/csv/tableExport.js"></script>
     <script>
         $('.chosen-select').chosen({width:"100%"} );
-        </script>
+        function csv() {
+          $('#search-result').tableExport({type:'csv'});
+        }
+        function search() {
+            recordType=$("#recordtype").val();
+            entry_recordtype=$("#entry_recordtype").val();
+            noentry_recordtype=$("#noentry_recordtype").val();
+            con_recordtype=$("#con_recordtype").val();
+            console.log(recordType);
+            $.ajax({
+                type: "GET",
+                url: "<?php echo url('/'); ?>/search",
+                data: {
+                    recordType:recordType,
+                    entry_recordtype:entry_recordtype,
+                    noentry_recordtype:noentry_recordtype,
+                    con_recordtype:con_recordtype,
+                },
+                dataType: "json",
+                timeout : 1000,
+                success: function(data){
+                    console.log(data);
+                    if (data.code == 0) {
+                        var num = data.results.length;
+                        for (var i = 0; i < num; i++) {
+                            var tr = document.createElement("tr");
+                            tr.innerHTML = ' <td>' + data.results[i].id + '</td>';
+                            tr.innerHTML += ' <td>' + data.results[i].instruction + '</td>';
+                            tr.innerHTML += ' <td>' + data.results[i].jobtitle + '</td>';
+                            tr.innerHTML += ' <td>' + data.results[i].personType + '</td>';
+                            tr.innerHTML += ' <td>' + data.results[i].professionalInterest + '</td>';
+                            tr.innerHTML += ' <td>' + data.results[i].organisation + '</td>';
+                            tr.innerHTML += ' <td>' + data.results[i].departmentLevel1 + '</td>';
+                            tr.innerHTML += ' <td>' + data.results[i].dapartmentLevel2 + '</td>';
+                            tr.innerHTML += ' <td>' + data.results[i].orgType + '</td>';
+                            tr.innerHTML += ' <td>' + data.results[i].country + '</td>';
+                            tr.innerHTML += ' <td>' + data.results[i].region + '</td>';
+                            tr.innerHTML +=  ' <td>' + "<a id='edit' href='/edit_contact?id=" + data.results[i].id+ "'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td>";
+                            tr.innerHTML +=  ' <td>' + "<a id='delete' href='/delete_contact?id=" + data.results[i].id+ "'><i class='fa fa-trash-o offset-md-3' aria-hidden='true'></i></a></td>";
+                            
+                            $('#search-result tbody').append(tr);
+                        }
+                    }
+                },
+                error:function() {
+                   console.log("search request error");
+                }
+            });
+        }
+    </script>
   </div>
 </body>
 
