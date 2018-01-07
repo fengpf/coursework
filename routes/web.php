@@ -11,7 +11,7 @@
 |
 */
 Route::get('/', 'HomeController@index');
-Route::post('login', 'Homecontroller@login');
+Route::post('login', 'HomeController@login');
 Route::get('logout', 'HomeController@logout');
 Route::get('access_denied', 'HomeController@access_denied');
 Route::get('/index', 'HomeController@index');
