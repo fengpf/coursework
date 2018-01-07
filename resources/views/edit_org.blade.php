@@ -29,16 +29,6 @@
         <div class="card-header">
           <i class="fa fa-table"></i> Data Entry</div>
         
-        
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link" href="/dataentry">Contact</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="/organisation">Organisation</a>
-            </li>
-        </ul>
-
       <form action="<?php echo url('/'); ?>/update_organisation" method="post">
        <?php echo method_field('POST'); ?>
         <?php echo csrf_field(); ?>

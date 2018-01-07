@@ -7,6 +7,31 @@
 <div style="margin: 50px 50px">
 <label for="product_search">Product Search: </label>
 <input id="product_search" type="text" data-provide="typeahead" />
+
+<div id="group1">
+    group1<input type="checkbox" name="box" id="group1" value="group1" />
+    name<input type="text" name="name"/>
+    age<input type="text" name="age" />
+    <select name="condition">
+        <option value="exact">exact</option>
+        <option value="like">like</option>
+        <option value="not">not</option>
+    </select>
+</div>
+
+<div id="group2">
+    group2<input type="checkbox" name="box" id="group2" value="group2" />
+    name<input type="text" name="name"/>
+    age<input type="text" name="age" />
+    <select name="condition">
+        <option value="exact">exact</option>
+        <option value="like">like</option>
+        <option value="not">not</option>
+    </select>
+</div>
+
+<input type="button" name="button" id="button" onclick="checkbox()" value="提交" />
+
 </div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="../../public/js/bootstrap3-typeahead.js"></script>
@@ -33,6 +58,50 @@
        // Nothing is active so it is a new value (or maybe empty value)
      }
    });
+</script>
+<script>
+
+ function checkbox() {
+      var str = document.getElementsByName("box");
+      var objarray = str.length;
+      var checkStr = '';
+      // var map = new Map()
+      // var obj = { name: '小缘', age: 14 }
+      var field = new Array();
+      for (i=0; i<objarray; i++) {
+      　 if(str[i].checked == true)
+      　 {
+            var key =  str[i].value;
+            var obj = new Object();
+            var list=document.getElementById(key).getElementsByTagName("input");
+            for(var j=0; j<list.length;j++)
+            {
+                  if(list[j].name=="name")   
+                  {
+                     obj.name=list[j].value;
+                  }
+                  if(list[j].name=="age")   
+                  {
+                     obj.age=list[j].value;
+                  }
+            }
+            obj.key=key;
+            field.push(obj);
+            // map.set(key, obj)
+            checkStr += key+",";
+      　 }
+      }
+      checkStr = checkStr.substr(0, checkStr.length-1)
+      console.log(checkStr);
+      if(checkStr == "") {
+      　 alert("请先选择复选框～！");
+      } else {
+      　 console.log(field);
+         fieldStr = JSON.stringify(field)
+      　 console.log(fieldStr);
+      　 alert(fieldStr);
+      }
+  }
 </script>
 </body>
 </html>

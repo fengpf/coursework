@@ -41,11 +41,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'host' => env('DB_HOST', '127.0.0.1'),//sqld-gz.bcehost.com
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'govknow'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', 'root'),
+            'database' => env('DB_DATABASE', 'govknow'),//nxFfKkoeArdjgdXhkssY
+            'username' => env('DB_USERNAME', 'root'),//4f5b3cbbff0640f68636670a6ef4b364
+            'password' => env('DB_PASSWORD', 'root'),//d02c1fadc43f42dc8aab6f7fd3098322
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

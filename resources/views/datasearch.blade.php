@@ -50,43 +50,43 @@
                     </label>
                 </div>
                 
-                <div class="form-row">
+                <div class="form-row" id="recordtype">
                     <label class="col-sm-2">
                         </br></br>Record Type
                     </label>
                     <label class="text-center col-sm-1">
-                        </br></br><input class="form-check-input position-static" type="checkbox" id="recordtype" value="recordtype">
+                        </br></br><input type="checkbox" name="blankCheckbox" value="recordtype">
                     </label>
                     <div class="col-sm-3 offset-sm-1">
-                    </br></br><input  id="entry_recordtype" class="form-control form-control-sm col-sm-12 offset-sm-3">
+                    </br></br><input  name="entry" class="form-control form-control-sm col-sm-12 offset-sm-3">
                     </div>
                     <div class="col-sm-2 offset-sm-1 text-center">
-                        </br></br><input id="noentry_recordtype"  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br></br><input name="noentry"  class="form-control form-control-sm col-sm-12 offset-sm-2">
                     </div>
                     <div class="col-sm-2 text-center">
                         </br></br>
-                        <select id="con_recordtype" aria-controls="dataTable">
+                        <select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row" id="instruction">
                     <label class="col-sm-2">
                         </br>Instruction
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="instruction">
+                        </br><input type="checkbox" name="blankCheckbox" value="instruction">
                     </label>
                     <div class="col-sm-3 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-3">
+                        </br><input  name="entry" class="form-control form-control-sm col-sm-12 offset-sm-3">
                     </div>
                     <div class="col-sm-2 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br><input name="noentry" class="form-control form-control-sm col-sm-12 offset-sm-2">
                     </div>
                     <div class="col-sm-2 text-center">
-                        </br><select name="dataTable_length" aria-controls="dataTable">
+                        </br><select name="condition"  aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
@@ -94,7 +94,7 @@
                     </div>
 
                 </div>
-                <div class="form-row ">
+                <div class="form-row" id="recordstatus">
                     <div class="col-sm-2">
                     <label>
                         </br>Record Status
@@ -103,12 +103,12 @@
                     <div class=" text-center col-sm-1">
                     <label >
                         </br>
-                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="recordstatus">
+                        <input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="recordstatus">
                     </label>
                     </div>
                     <div class="col-sm-3 offset-sm-1 ">
                         </br>
-                            <select name="recordstatus" class="chosen-select " multiple />
+                            <select name="entry" style="width:180px;">
                             <option value="deceased">Deceased</option>
                             <option value="left-retired">Left-Retired</option>
                             <option value="left-other">Left-Other</option>
@@ -118,10 +118,10 @@
                         </select>
                     </div>
                     <div class="col-sm-2 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br><input  name="noentry" class="form-control form-control-sm col-sm-12 offset-sm-2">
                     </div>
                     <div class="col-sm-2  text-center">
-                        </br><select name="dataTable_length" aria-controls="dataTable">
+                        </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
@@ -129,36 +129,36 @@
                     </div>
 
                 </div>
-                <div class="form-row">
+                <div class="form-row" id="jobtitle">
                     <label class="col-sm-2">
                         </br>Job Title
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="jobtitle">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="jobtitle">
                     </label>
                     <div class="col-sm-3 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-3">
+                        </br><input  name="entry" class="form-control form-control-sm col-sm-12 offset-sm-3">
                             </div>
                     <div class="col-sm-2 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br><input  name="noentry" class="form-control form-control-sm col-sm-12 offset-sm-2">
                             </div>
                     <div class="col-sm-2  text-center">
-                        </br><select name="dataTable_length" aria-controls="dataTable">
+                        </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row" id="persontype">
                     <label class="col-sm-2">
                         </br>Person Type
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="persontype">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="persontype">
                     </label>
                     <div class="col-sm-3 offset-sm-1">
-                        </br><select class="offset-sm-4 form-control form-control-sm col-sm-12 chosen-select" multiple>
+                        </br><select name="entry" style="width:180px;">
                             <option value="academic - lecturer">Academic - Lecturer</option>
                             <option value="academic - researcher">Academic - Researcher</option>
                             <option value="academic - senior management">Academic - Senior Management</option>
@@ -216,112 +216,112 @@
 
                             </div>
                     <div class="col-sm-2 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br><input name="noentry"  class="form-control form-control-sm col-sm-12 offset-sm-2">
                             </div>
                     <div class="col-sm-2 text-center">
-                        </br><select name="dataTable_length" aria-controls="dataTable">
+                        </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row" id="professionalinterests">
                     <label class="col-sm-2">
                         </br>Professional Interests
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="professionalinterests">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="professionalinterests">
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option3">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="professionalinterests">
                     </label>
                     <div class="col-sm-3 ">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-3">
+                        </br><input  name="entry" class="form-control form-control-sm col-sm-12 offset-sm-3">
                             </div>
                     <div class="col-sm-2 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br><input  name="noentry" class="form-control form-control-sm col-sm-12 offset-sm-2">
                             </div>
                     <div class="col-sm-2 text-center">
-                        </br><select name="dataTable_length" aria-controls="dataTable">
+                        </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row" id="organisation">
                     <label class="col-sm-2">
                         </br>Organisation
                     </label>
                     <label class=" text-center col-sm-1 offset-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="organisation">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="organisation">
                     </label>
                     <div class="col-sm-3 ">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-3">
+                        </br><input  name="entry" class="form-control form-control-sm col-sm-12 offset-sm-3">
                             </div>
                     <div class="col-sm-2 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br><input  name="noentry" class="form-control form-control-sm col-sm-12 offset-sm-2">
                             </div>
                     <div class="col-sm-2 text-center">
-                        </br><select name="dataTable_length" aria-controls="dataTable">
+                        </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row" id="departmentlevel1">
                     <label class="col-sm-2">
                         </br>Department Level 1
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="departmentlevel1">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="departmentlevel1">
                     </label>
                     <div class="col-sm-3 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-3">
+                        </br><input  name="entry" class="form-control form-control-sm col-sm-12 offset-sm-3">
                             </div>
                     <div class="col-sm-2 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br><input  name="noentry" class="form-control form-control-sm col-sm-12 offset-sm-2">
                             </div>
                     <div class="col-sm-2 text-center">
-                        </br><select name="dataTable_length" aria-controls="dataTable">
+                        </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row" id="departmentlevel2">
                     <label class="col-sm-2">
                         </br>Department Level 2
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="departmentlevel2">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="departmentlevel2">
                     </label>
                     <div class="col-sm-3 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-3">
+                        </br><input  name="entry" class="form-control form-control-sm col-sm-12 offset-sm-3">
                             </div>
                     <div class="col-sm-2 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br><input  name="noentry" class="form-control form-control-sm col-sm-12 offset-sm-2">
                             </div>
                     <div class="col-sm-2 text-center">
-                        </br><select name="dataTable_length" aria-controls="dataTable">
+                        </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row" id="orgtype">
                     <label class="col-sm-2">
                         </br>Org Type
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="orgtype">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="orgtype">
                     </label>
                     <div class="col-sm-3 offset-sm-1">
-                        </br><select name="dataTable_length" class="form-control form-control-sm offset-sm-3 chosen-select" multiple>
+                        </br><select name="entry" style="width:180px;">
                             <option value="banks">Banks</option>
                             <option value="central government">Central Government</option>
                             <option value="charity/voluntary(philanthropic)">Charity/Voluntary(Philanthropic)</option>
@@ -349,28 +349,28 @@
 
                             </div>
                     <div class="col-sm-2 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br><input  name="noentry" class="form-control form-control-sm col-sm-12 offset-sm-2">
                             </div>
                     <div class="col-sm-2 text-center">
-                        </br><select name="dataTable_length" aria-controls="dataTable">
+                        </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row" id="country">
                     <label class="col-sm-2">
                         </br>Country
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="country">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="country">
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="country">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="country">
                     </label>
                     <div class="col-sm-3 ">
-                        </br><input type="text" id="country" class="form-control form-control-sm offset-sm-3" autocomplete="off" data-provide="typeahead" data-source='["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic (CAR)","Chad","Chile","China","Colombia","Comoros","Democratic Republic of the Congo","Republic of the Congo","Costa Rica","Cote d‘Ivoire",
+                        </br><input name="entry" type="text" class="form-control form-control-sm offset-sm-3" autocomplete="off" data-provide="typeahead" data-source='["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic (CAR)","Chad","Chile","China","Colombia","Comoros","Democratic Republic of the Congo","Republic of the Congo","Costa Rica","Cote d‘Ivoire",
                             "Croatia","Cuba","Cyprus","Czech Republic","Denmark", "Djibouti", "Dominica","Dominican Republic","Ecuador","Egypt","El Salvador",
                             "Equatorial Guinea","Eritrea","Estonia","Ethiopia","Fiji","Finland",
                             "France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada",
@@ -396,28 +396,28 @@
                             "Vatican City (Holy See)","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"]'>
                             </div>
                     <div class="col-sm-2 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br><input  name="noentry" class="form-control form-control-sm col-sm-12 offset-sm-2">
                             </div>
                     <div class="col-sm-2 text-center">
-                        </br><select name="dataTable_length" aria-controls="dataTable">
+                        </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row" id="region">
                     <label class="col-sm-2">
                         </br>Region
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="region">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="region">
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="region">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="region">
                     </label>
                     <div class="col-sm-3 ">
-                        </br><select name="dataTable_length" aria-controls="dataTable" class="form-control form-control-sm chosen-select" multiple>
+                        </br><select name="entry" style="width:180px;">
                             <option value="east of england">England</option>
                             <option value="east midlands">East Midlands</option>
                             <option value="london">London</option>
@@ -435,157 +435,132 @@
                         </select>
                             </div>
                     <div class="col-sm-2 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br><input name="noentry" class="form-control form-control-sm col-sm-12 offset-sm-2">
                             </div>
                     <div class="col-sm-2 text-center">
-                        </br><select name="dataTable_length" aria-controls="dataTable">
+                        </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row" id="biography">
                     <label class="col-sm-2">
                         </br>Biography
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="biography">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="biography">
                     </label>
                     <div class="col-sm-3 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-3">
+                        </br><input name="entry" class="form-control form-control-sm col-sm-12 offset-sm-3">
                             </div>
                     <div class="col-sm-2 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br><input  name="noentry" class="form-control form-control-sm col-sm-12 offset-sm-2">
                             </div>
                     <div class="col-sm-2 text-center">
-                        </br><select name="dataTable_length" aria-controls="dataTable">
+                        </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row" id="notes">
                     <label class="col-sm-2">
                         </br>Notes
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="notes">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="notes">
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="notes">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="notes">
                     </label>
                     <div class="col-sm-3 ">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-3">
+                        </br><input  name="entry" class="form-control form-control-sm col-sm-12 offset-sm-3">
                             </div>
                     <div class="col-sm-2 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br><input name="noentry"  class="form-control form-control-sm col-sm-12 offset-sm-2">
                             </div>
                     <div class="col-sm-2 text-center">
-                        </br><select name="dataTable_length" aria-controls="dataTable">
+                        </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row" id="schoollowerage">
                     <label class="col-sm-2">
                         </br>School Lower Age
                     </label>
                     <label class=" text-center col-sm-1 offset-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="schoollowerage">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="schoollowerage">
                     </label>
                     <div class="col-sm-3 ">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-3">
+                        </br><input  name="entry" class="form-control form-control-sm col-sm-12 offset-sm-3">
                             </div>
                     <div class="col-sm-2 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br><input  name="noentry" class="form-control form-control-sm col-sm-12 offset-sm-2">
                             </div>
                     <div class="col-sm-2 text-center">
-                        </br><select name="dataTable_length" aria-controls="dataTable">
+                        </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
                         </select>
                     </div>
             </div>
-            <div class="form-row">
+            <div class="form-row" id="schoolhigherage">
                     <label class="col-sm-2">
                         </br>School Higher Age
                     </label>
                     <label class=" text-center col-sm-1 offset-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="schoolhigherage">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="schoolhigherage">
                     </label>
                     <div class="col-sm-3 ">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-3">
+                        </br><input  name="entry" class="form-control form-control-sm col-sm-12 offset-sm-3">
                             </div>
                     <div class="col-sm-2 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br><input  name="noentry" class="form-control form-control-sm col-sm-12 offset-sm-2">
                             </div>
                     <div class="col-sm-2 text-center">
-                        </br><select name="dataTable_length" aria-controls="dataTable">
+                        </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
                         </select>
                     </div>
             </div>
-            <div class="form-row">
+            <div class="form-row" id="schoolURN">
                     <label class="col-sm-2">
                         </br>School URN
                     </label>
                     <label class=" text-center col-sm-1 offset-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="schoolURN">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="schoolURN">
                     </label>
                     <div class="col-sm-3 ">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-3">
+                        </br><input name="entry" class="form-control form-control-sm col-sm-12 offset-sm-3">
                             </div>
                     <div class="col-sm-2 offset-sm-1">
-                        </br><input  class="form-control form-control-sm col-sm-12 offset-sm-2">
+                        </br><input  name="noentry"  class="form-control form-control-sm col-sm-12 offset-sm-2">
                             </div>
                     <div class="col-sm-2 text-center">
-                        </br><select name="dataTable_length" aria-controls="dataTable">
+                        </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
                             <option value="not">not</option>
                         </select>
                     </div>
             </div>
+
+            <br/><br/>
+
             <div class="form-row">
                 <div class="col-md-6">
                     <button onclick="search()" type="button" class="btn btn-primary">Search</button>
                 </div>
-            </div><br/><br/>
-
-            <div class="table-responsive">
-                    <table class="table table-bordered" id="search-result" width="100%" cellspacing="0">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Instruction</th>
-                          <th>Job Title</th>
-                          <th>Person Type</th>
-                          <th>Professional Interests</th>
-                          <th>Organisation</th>
-                          <th>Department Level 1</th>
-                          <th>Department Level 2</th>
-                          <th>OrgType</th>
-                          <th>Country</th>
-                          <th>Region</th>
-                          <th>Edit</th>
-                          <th>Del</th>
-                        </tr>
-                      </thead>
-                      <tbody></tbody>
-                    </table>
-            </div>
-
-            <div class="col-md-6">
-                 <button onclick="csv()" type="button" class="btn btn-primary">Export</button>
-            </div>
-
+            </div><br/>
         </div>
       </div>
     </div>
@@ -638,23 +613,72 @@
     <script type="text/javascript" src="js/csv/tableExport.js"></script>
     <script>
         $('.chosen-select').chosen({width:"100%"} );
+        $("#search-result").hide();
+        $("#search-condition").hide();
+        
+
         function csv() {
           $('#search-result').tableExport({type:'csv'});
+          $('#search-condition').tableExport({type:'csv'});
         }
+
         function search() {
-            recordType=$("#recordtype").val();
-            entry_recordtype=$("#entry_recordtype").val();
-            noentry_recordtype=$("#noentry_recordtype").val();
-            con_recordtype=$("#con_recordtype").val();
-            console.log(recordType);
+            var str = document.getElementsByName("blankCheckbox");
+            var objarray = str.length;
+            var checkStr = '';
+            var fieldStr = '';
+            var field = new Array();
+            console.log("start");            
+            for (i=0; i<objarray; i++) {
+            　 if(str[i].checked == true)
+            　 {
+                  var key =  str[i].value;
+                  var obj = new Object();
+                  var list=document.getElementById(key).getElementsByTagName("input");
+                  for(var j=0; j<list.length;j++)
+                  {
+                        if(list[j].name=="entry")   
+                        {
+                           obj.entry=list[j].value;
+                        }
+                        if(list[j].name=="noentry")   
+                        {
+                           obj.noentry=list[j].value;
+                        }
+                  }
+                  var list2=document.getElementById(key).getElementsByTagName("select");
+                  for(var k=0; k<list2.length;k++)
+                  {
+                        if(list2[k].name=="condition")   
+                        {
+                           obj.condition=list2[k].value;
+                        }
+                  }
+                  obj.key=key;
+                  field.push(obj);
+                  checkStr += key+",";
+            　 }
+            }
+            checkStr = checkStr.substr(0, checkStr.length-1)
+            console.log(checkStr);
+            if(checkStr == "") {
+              console.log("请先选择复选框～！");
+            } else {
+            　 console.log(field);
+               fieldStr = JSON.stringify(field)
+            　 console.log(fieldStr);
+            　 //alert(fieldStr);
+            }
+
+            window.location.href="<?php echo url('/'); ?>/search?fieldStr=" + fieldStr + "&checkStr=" + checkStr; 
+
+
             $.ajax({
                 type: "GET",
                 url: "<?php echo url('/'); ?>/search",
                 data: {
-                    recordType:recordType,
-                    entry_recordtype:entry_recordtype,
-                    noentry_recordtype:noentry_recordtype,
-                    con_recordtype:con_recordtype,
+                    fieldStr:fieldStr,
+                    checkStr:checkStr,
                 },
                 dataType: "json",
                 timeout : 1000,
@@ -662,6 +686,8 @@
                     console.log(data);
                     if (data.code == 0) {
                         var num = data.results.length;
+                        //if ($('#recordType').attr('checked')) {
+                    
                         for (var i = 0; i < num; i++) {
                             var tr = document.createElement("tr");
                             tr.innerHTML = ' <td>' + data.results[i].id + '</td>';
@@ -677,9 +703,10 @@
                             tr.innerHTML += ' <td>' + data.results[i].region + '</td>';
                             tr.innerHTML +=  ' <td>' + "<a id='edit' href='/edit_contact?id=" + data.results[i].id+ "'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td>";
                             tr.innerHTML +=  ' <td>' + "<a id='delete' href='/delete_contact?id=" + data.results[i].id+ "'><i class='fa fa-trash-o offset-md-3' aria-hidden='true'></i></a></td>";
-                            
                             $('#search-result tbody').append(tr);
                         }
+                        $("#search-result").show();
+                        $("#search-condition").show();
                     }
                 },
                 error:function() {
@@ -687,6 +714,8 @@
                 }
             });
         }
+
+        
     </script>
   </div>
 </body>

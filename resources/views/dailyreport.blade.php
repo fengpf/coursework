@@ -44,7 +44,8 @@
                     <tbody>
                         <?php foreach($report as $res) { ?>
                         <tr>
-                            <td><a href="<?php echo url('/'); ?>/dailyreport?date=<?php echo $res->entry_time; ?>" ><?php echo $res->entry_time; ?></a></td>
+                            <td><a href="<?php echo url('/'); ?>/dailyreport?date=<?php echo $res->entry_time; ?>" >
+                              <?php $time = strtotime($res->entry_time); echo date('Y-m-d', $time); ?></a></td>
                             <td><?php echo $sub; ?></td>
                             <td><?php echo $res->new; ?></td>
                             <td><?php echo $res->up; ?></td>

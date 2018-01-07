@@ -42,17 +42,60 @@
            {{Session::get('message')}}
        </div>  
       @endif
+      
       <div class="card-body">
-            <div class="table-responsive">
 
+          @if(!empty($fieldArr))
+          <label class="col-sm-2">
+                  QueryCondition
+         </label></br>
+          <div class="table-responsive">
+                  <table class="table table-bordered" id="search-condition" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th>QueryMethod</th>
+                        <th>QueryField</th>
+                        <th>SearchName</th>
+                        <th>Event</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                          <?php foreach($fieldArr as $f) { ?>
+                              <tr>
+                                  <td>
+                                     <?php echo "select"; ?>
+                                  </td>
+                                  <td>
+                                      <?php echo $f['key']; ?>
+                                  </td>
+                                  <td>
+                                       <?php echo $f['entry']. ' ' .$f['noentry']; ?>
+                                   </td>
+                                   <td>
+                                          <?php echo $f['condition']; ?>
+                                   </td>
+                              </tr>
+                          <?php } ?>
+                  </tbody>
+                  </table>
+          </div>
+          <div class="form-row">
+                  <div class="col-md-6">
+                      </br><button onclick="exportCSV()" type="button" class="btn btn-primary" role="button">Export</a>
+                  </div>
+          </div></br>
+          @endif
+
+          @if(!empty($results))
+            <div class="table-responsive" id="search-user">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>id</th>
-                        <th>fname</th>
-                        <th>lname</th>
-                        <th>email</th>
-                        <th>action</th>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -81,7 +124,7 @@
                                 <td>
                                     <a id="edit" href="/edit_user?id=<?php echo $res->id; ?>">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                    <a id="delete" data-toggle="modal" href="#myModal">
+                                   <a id="delete" href="/delete_user?id=<?php echo $res->id; ?>">
                                         <i class="fa fa-trash-o offset-md-3" aria-hidden="true"></i></a>
                                     <!-- Modal -->
                                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
@@ -105,13 +148,13 @@
                         </tbody>
                 </table>
             </div>
-
             <div class="form-row">
-                    <div class="col-md-6">
-                        </br><button type="sumbmit" class="btn btn-primary" role="button">Export</a>
-                    </div>
+                <div class="col-md-6">
+                    <button onclick="exportCSV2()" type="button" class="btn btn-primary" role="button">Export</a>
                 </div>
-            </div>
+             </div></br>
+           @endif
+
        </from>
 
       </div>
@@ -152,43 +195,17 @@
     <script src="js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
-     <script>
-     function del_org() {
-        var formData = new FormData();
-            _token = $("#token").val();
-        id = $(".modal-footer #del_id").val();
-        formData.append("_token", _token);
-        formData.append("id", id);
-        console.log(id);
-        $.ajax({
-          url: "<?php echo url('/'); ?>/delete_user",
-          type: "POST",
-          data: formData,
-          dataType: 'json',
-          contentType: false,
-          processData: false,
-          timeout : 2000
-        })
-        .done(function (data) {
-          // 请求成功后要做的工作
-                //alert(data.msg);
-                if (data.code==0){
-                   console.log("success");
-                   window.location.href="<?php echo url('/'); ?>/search_admin_flush"; 
-                }
-        })
-        .fail(function (xhr) {
-          // 请求失败后要做的工作
-          console.log('fail:' + JSON.stringify(xhr));
-        })
-        .error(function (xhr) {
-          console.log('error:' + xhr.responseText);
-        })
-        .always(function () {
-          // 不管成功或失败都要做的工作
-          //console.log('complete');
-        });
-        return false;
+
+    <script type="text/javascript" src="js/csv/tableExport.js"></script>
+
+    <script>
+       
+      function exportCSV() {
+          $('#search-condition').tableExport({type:'csv'});
+       }
+
+        function exportCSV2() {
+          $('#search-user').tableExport({type:'csv'});
         }
     </script>
   </div>

@@ -59,7 +59,15 @@
                             <td><?php echo $user->email; ?></td>
                             <td><?php echo $user->fname; ?></td>
                             <td><?php echo $user->lname; ?></td>
-                            <td><?php echo $user->active; ?></td>
+                            <td>
+                            <?php 
+                                if($user->active) {
+                                    echo "<i class='fa fa-check' aria-hidden='true'></i>";
+                                } else {
+                                    echo "<i class='fa fa-times' aria-hidden='true'></i>";
+                                }
+                            ?>
+                            </td>
                             <td>
                                 <a id="edit" href="/edit_user?id=<?php echo $user->id; ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>

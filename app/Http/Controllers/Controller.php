@@ -45,6 +45,7 @@ class Controller extends BaseController
     }
 
     public function getMid() {
+        $mid = 0;
         if (session::get('user_id')){
             $mid = session::get('user_id')[0];
         } elseif(session::get('superadmin_id')){
@@ -52,11 +53,17 @@ class Controller extends BaseController
         } elseif(session::get('admin_id')){
             $mid = session::get('admin_id')[0];
         }
+        if ($mid==0) {
+            return redirect()->action('HomeController@index');
+        }
         return $mid;
     }
 
     public function getUserName(){
         $user = $this->getUser();
+        if (empty($user)) {
+            return redirect()->action('HomeController@index');
+        }
         $name = $user->fname.$user->lname;
         return $name;
     }

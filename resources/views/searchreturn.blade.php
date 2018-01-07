@@ -33,133 +33,114 @@
        <form action="<?php echo url('/'); ?>/csv" method="post" enctype="multipart/form-data">
        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" >
        <input type="hidden" name="action" value="export" />
-       <?php if ($table == 'contact') {?>
-           <input type="hidden" name="table" value="contact" />
-       <?php } ?>
-       <?php if ($table == 'organisation') {?>
-         <input type="hidden" name="table" value="organisation" />
-       <?php } ?>
+     
        @if(Session::has('message'))                                            
        <div class="alert alert-success">                                          
            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
            {{Session::get('message')}}
        </div>  
        @endif
-            <div class="card-body">
+       <div class="card-body">
+            @if(!empty($fieldArr))
+            <label class="col-sm-2">
+                    QueryCondition
+           </label></br>
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <?php if ($table == 'organisation') {?>
+                    <table class="table table-bordered" id="search-condition" width="100%" cellspacing="0">
+                      <thead>
                         <tr>
-                            <th>id</th>
-                            <th>name</th>
-                            <th>orgType</th>
-                            <th>interestSectorAreas</th>
-                            <th>twitter</th>
-                            <th>action</th>
+                          <th>QueryMethod</th>
+                          <th>QueryField</th>
+                          <th>SearchName</th>
+                          <th>Event</th>
                         </tr>
-                    <?php }?>
-
-                    <?php if ($table == 'contact') {?>
-                        <tr>
-                            <th>id</th>
-                            <th>instruction</th>
-                            <th>jobtitle</th>
-                            <th>personType</th>
-                            <th>organisation</th>
-                            <th>region</th>
-                            <th>country</th>
-                            <th>action</th>
-                        </tr>
-                    <?php }?>
-                </thead>
-                <tbody>
-                   <?php if ($table == 'organisation') {?>
-                      <?php foreach($results as $res) { ?>
-                            <tr>
-                                <td>
-                                   <?php echo $res->id; ?>
-                                   <input type="hidden" name="id[]" value="<?php echo $res->id; ?>" />
-                                </td>
-                                <td>
-                                   <?php echo $res->name; ?>
-                                   <input type="hidden" name="name[]" value="<?php echo $res->name; ?>" />
-                                   
-                                </td>
-                                <td>
-                                   <?php echo $res->orgType; ?>
-                                   <input type="hidden" name="orgType[]" value="<?php echo $res->orgType; ?>" />
-                                   
-                                </td>
-                                <td>
-                                    <?php echo $res->interestSectorAreas; ?>
-                                   <input type="hidden" name="interestSectorAreas[]" value="<?php echo $res->interestSectorAreas; ?>" />
-                                    
-                                </td>
-                                <td>
-                                    <?php echo $res->twitter; ?>
-                                   <input type="hidden" name="twitter[]" value="<?php echo $res->twitter; ?>" />
-                                    
-                               </td>
-                                <td>
-                                    <a id="edit" href="/edit_organisation?id=<?php echo $res->id; ?>" />
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                    <a id="delete" href="/delete_organisation?id=<?php echo $res->id; ?>" />
-                                        <i class="fa fa-trash-o offset-md-3" aria-hidden="true"></i></a>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    Are you sure to delete this?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <input type="hidden" id="token" name="_token" value="<?php echo csrf_token(); ?>" >
-                                                    <input type="hidden" id="del_id" value="<?php echo $res->id;?>" >
-                                                    <button onclick="del_org()" type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
-                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
+                      </thead>
+                      <tbody>
+                            <?php foreach($fieldArr as $f) { ?>
+                                <tr>
+                                    <td>
+                                       <?php echo "select"; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $f['key']; ?>
+                                    </td>
+                                    <td>
+                                         <?php echo $f['entry']. ' ' .$f['noentry']; ?>
+                                     </td>
+                                     <td>
+                                            <?php echo $f['condition']; ?>
+                                     </td>
                                 </tr>
                             <?php } ?>
-                        </tbody>
-                   <?php }?>
-                   <?php if ($table == 'contact') {?>
-                    <?php foreach($results as $res) { ?>
+                    </tbody>
+                    </table>
+            </div>
+            <div class="form-row">
+                    <div class="col-md-6">
+                        </br><button onclick="exportCSV()" type="button" class="btn btn-primary" role="button">Export</a>
+                    </div>
+            </div></br>
+            @endif
+
+            @if(!empty($results))
+            <label class="col-sm-2">
+                    Contact
+           </label></br>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="search-contact" width="100%" cellspacing="0">
+                <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>RecordType</th>
+                            <th>Instruction</th>
+                            <th>Job Title</th>
+                            <th>Person Type</th>
+                            <th>Professional Interests</th>
+                            <th>Organisation</th>
+                            <th>Department Level 1</th>
+                            <th>Department Level 2</th>
+                            <th>Country</th>
+                            <th>Region</th>
+                            <th>Action</th>
+                        </tr>
+                </thead>
+
+                <tbody>
+                      <?php foreach($results as $res) { ?>
                           <tr>
                               <td>
                                  <?php echo $res->id; ?>
-                                 <input type="hidden" name="id[]" value="<?php echo $res->id; ?>" />
                               </td>
                               <td>
+                                    <?php echo $res->recordType; ?>
+                             </td>
+                              <td>
                                  <?php echo $res->instruction; ?>
-                                 <input type="hidden" name="instruction[]" value="<?php echo $res->instruction; ?>" />
-                                 
                               </td>
                               <td>
                                  <?php echo $res->jobtitle; ?>
-                                 <input type="hidden" name="jobtitle[]" value="<?php echo $res->jobtitle; ?>" />
-                                 
                               </td>
                               <td>
                                   <?php echo $res->personType; ?>
-                                 <input type="hidden" name="personType[]" value="<?php echo $res->personType; ?>" />
-                                  
                               </td>
                               <td>
-                                  <?php echo $res->organisation; ?>
-                                  <input type="hidden" name="organisation[]" value="<?php echo $res->organisation; ?>" />
+                                  <?php echo $res->professionalInterest; ?>
                              </td>
                              <td>
+                                    <?php echo $res->organisation; ?>
+                            </td>
+                            <td>
+                                    <?php echo $res->departmentLevel1; ?>
+                            </td>
+                            <td>
+                                    <?php echo $res->dapartmentLevel2; ?>
+                            </td>
+
+                             <td>
                                     <?php echo $res->region; ?>
-                                    <input type="hidden" name="region[]" value="<?php echo $res->region; ?>" />
                              </td>
                              <td>
                                     <?php echo $res->country; ?>
-                                    <input type="hidden" name="country[]" value="<?php echo $res->country; ?>" />
                              </td>
                               <td>
                                   <a id="edit" href="/edit_contact?id=<?php echo $res->id; ?>" />
@@ -170,9 +151,6 @@
                                   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
                                       <div class="modal-dialog" role="document">
                                           <div class="modal-content">
-                                              <div class="modal-body">
-                                                  Are you sure to delete this?
-                                              </div>
                                               <div class="modal-footer">
                                                   <input type="hidden" id="token" name="_token" value="<?php echo csrf_token(); ?>" >
                                                   <input type="hidden" id="del_id" value="<?php echo $res->id;?>" >
@@ -183,23 +161,20 @@
                                       </div>
                                   </div>
                               </td>
-                              </tr>
+                            </tr>
                           <?php } ?>
                       </tbody>
-                 <?php }?>
-               
-               
                 </table>
             </div>
-
             <div class="form-row">
                     <div class="col-md-6">
-                        </br><button type="sumbmit" class="btn btn-primary" role="button">Export</a>
+                        <button onclick="exportCSV2()" type="button" class="btn btn-primary" role="button">Export</a>
                     </div>
-                </div>
-            </div>
-       </from>
+            </div></br>
+            @endif
 
+        </div>
+       </from>
       </div>
     </div>
     <!-- /.container-fluid-->
@@ -238,44 +213,15 @@
     <script src="js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
+    <script type="text/javascript" src="js/csv/tableExport.js"></script>
      <script>
-     function del_org() {
-        var formData = new FormData();
-            _token = $("#token").val();
-        id = $(".modal-footer #del_id").val();
-        formData.append("_token", _token);
-        formData.append("id", id);
-            console.log(id);
-        $.ajax({
-          url: "<?php echo url('/'); ?>/delete_organisation",
-          type: "POST",
-          data: formData,
-          dataType: 'json',
-          contentType: false,
-          processData: false,
-          timeout : 2000
-        })
-        .done(function (data) {
-          // 请求成功后要做的工作
-                //alert(data.msg);
-                if (data.code==0){
-                  console.log("success");
-                  window.location.href="<?php echo url('/'); ?>/search_flush"; 
-                }
-        })
-        .fail(function (xhr) {
-          // 请求失败后要做的工作
-          console.log('fail:' + JSON.stringify(xhr));
-        })
-        .error(function (xhr) {
-          console.log('error:' + xhr.responseText);
-        })
-        .always(function () {
-          // 不管成功或失败都要做的工作
-          //console.log('complete');
-        });
-        return false;
-        }
+      function exportCSV() {
+        $('#search-condition').tableExport({type:'csv'});
+      }
+
+      function exportCSV2() {
+        $('#search-contact').tableExport({type:'csv'});
+      }
 
         function del_contact() {
             var formData = new FormData();

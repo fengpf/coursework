@@ -10,89 +10,130 @@ use Session;
 class SearchController extends Controller
 {
 
-    private function setInput($var){
-        if(isset($var) && !empty($var)){
-            return $var;
-        } else {
-            return false;
+    private function setWhere($field, $entryArr, $noentryArr, $condition, $handle){
+        
+        if (!empty($entryArr)) {
+            if ($condition=='exact'){
+                 foreach ($entryArr as $v) {
+                     if (!empty($v)) {
+                       $handle->where($field, '=', $v);
+                     }
+                 }
+            } elseif ($condition=='like') {
+                 foreach ($entryArr as $v) {
+                     if (!empty($v)) {
+                        $handle->where($field, 'like', '%' . $v . '%');
+                     }
+                 }
+            } elseif ($condition=='not') {
+                 foreach ($entryArr as $v) {
+                     if (!empty($v)) {
+                        $handle->where($field, 'not like', '%' . $v . '%');
+                     }
+                 }
+            }
         }
+
+        if (!empty($noentryArr)) {
+             if ($condition=='exact'){
+                 foreach ($noentryArr as $v) {
+                     if (!empty($v)) {
+                         $handle->where($field, '=', $v);
+                     }
+                 }
+             } elseif ($condition=='like') {
+                 foreach ($noentryArr as $v) {
+                     if (!empty($v)) {
+                        $handle->where($field, 'like', '%' . $v . '%');
+                     }
+                 }
+             } elseif ($condition=='not') {
+                 foreach ($noentryArr as $v) {
+                     if (!empty($v)) {
+                        $handle->where($field, 'not like', '%' . $v . '%');
+                     }
+                 }
+             }
+         }
     }
 
     public function search(Request $request){
-        $recordType = $this->setInput($request->get('recordType'));
-        $entry_recordtype = $this->setInput($request->get('entry_recordtype'));
-        $noentry_recordtype = $this->setInput($request->get('noentry_recordtype'));
-        $con_recordtype = $this->setInput($request->get('con_recordtype'));
-        
+        // key entry noentry condition
+        $fieldStr = trim($request->get('fieldStr'));
+        // $checkStr = trim($request->get('checkStr'));
+        $fieldArr = json_decode($fieldStr, true);
+        $handle = DB::table('contact');
+        $handle2 = DB::table('organisation');
+        $queryOrg = false;
+        $queryCon = false;
+        $queryall = false;
+        foreach ($fieldArr as $key=>$val) {
+           if (isset($val['key']) && !empty($val['key'])) {
+               $condition = $val['condition'];
+               $entry = $val['entry'];
+               $noentry = $val['noentry'];
+               $entryArr = explode(',', $entry);
+               $noentryArr = explode(',', $noentry);
+               $field = $val['key'];
+               if (in_array($val['key'], 
+                  ['organisation', 'schoollowerage', 'schoolhigherage', 'schoolURN'])) {
+                  if($val['key'] == 'organisation') {
+                     $field = 'name';
+                  }
+                  $this->setWhere($field, $entryArr, $noentryArr, $condition, $handle2);
+                //   dump($val['key']);
+                  $queryOrg = true;
+               } elseif (in_array($val['key'], 
+                   ['professionalinterests', 'country', 'region', 'notes'])) {
+                  $this->setWhere($field, $entryArr, $noentryArr, $condition, $handle);
+                  $this->setWhere($field, $entryArr, $noentryArr, $condition, $handle2);
+                //   dump($val['key']);
+                  $queryall = true;
+               } else {
+                  $this->setWhere($field, $entryArr, $noentryArr, $condition, $handle);
+                //   dump($val['key']);
+                  $queryCon = true;
+               }
+            }
+       }
+    
+       $results = $results2 = [];
+       if ($queryall) {
+          $results =  $handle->get();
+          $results2 =  $handle2->get();
+       } 
+       if ($queryOrg) {
+          $results2 =  $handle2->get();
+       } 
+       if ($queryCon) {
+          $results =  $handle->get();
+       }
 
-        // $instruction = $this->setInput($request->get('instruction'));
-        // $recordStatus = $this->setInput($request->get('recordStatus'));
-        // $jobtitle = $this->setInput($request->get('jobtitle'));
-        // $personType = $this->setInput($request->get('personType'));
-        // $professionalInterest = $this->setInput($request->get('professionalInterest'));
-        // $organisation = $this->setInput($request->get('organisation'));
-        // $departmentLevel1 = $this->setInput($request->get('departmentLevel1'));
-        // $departmentLevel2 = $this->setInput($request->get('departmentLevel2'));
-        // $orgType = $this->setInput($request->get('orgType'));
-        // $country = $this->setInput($request->get('country'));
-        // $region = $this->setInput($request->get('region'));
-        // $biographyText = $this->setInput($request->get('biographyText'));
-        // $notes = $this->setInput($request->get('biographyText'));
-        // $schoolLowerAge = $this->setInput($request->get('schoolLowerAge'));
-        // $schoolHigherAge = $this->setInput($request->get('schoolHigherAge'));
-        // $schoolURN = $this->setInput($request->get('schoolURN'));
+    //    dump($results);die;
+      if (!empty($results)) {
+        return view('searchreturn',[
+            'fieldArr' => $fieldArr,
+            'results' => $results,
+            'name' =>$this->getUserName()
+        ]);
+      } 
+
+      if (!empty($results2)) {
+        return view('searchreturn_org',[
+            'fieldArr' => $fieldArr,
+            'results2' => $results2,
+            'name' =>$this->getUserName()
+        ]);
+      } 
        
-        $where = $this->getWhere($recordType, $entry_recordtype, $noentry_recordtype, $con_recordtype);
-        $results = DB::select('select * from contact,organisation where '.$where, []);
-
-                // ->where('contact.instruction',$instruction)
-                // ->where('contact.recordStatus',$recordStatus)
-                // ->where('contact.jobtitle',$jobtitle)
-                // ->where('contact.personType',$personType)
-                // ->where('contact.professionalInterest',$professionalInterest)
-                // ->where('contact.organisaiton',$organisation)
-                // ->where('contact.departmentLevel1',$departmentLevel1)
-                // ->where('contact.departmentLevel2',$departmentLevel2)
-                // ->where('contact.biographyText',$biographyText)
-                // ->where('contact.notes',$notes)
-                // ->where('organisation.orgType',$orgType)
-                // ->where('organisation.professionalInterest',$professionalInterest)
-                // ->where('organisation.schoolLowerAge',$schoolLowerAge)
-                // ->where('organisation.schoolHigherAge',$schoolHigherAge)
-                // ->where('organisation.schoolURN',$schoolURN)
-        // dump($results);die;
-      
-        if (!empty($results)) {
-           $data['code']=0;
-        } else {
-            $data['code']=-1;
-        }
-        $data['results']=$results;
-        $data['name']=$this->getUserName();
-        echo json_encode($data);
     }
-
-    // public function search(Request $request){
-    //     $table = trim($request->table);
-    //     $field = trim($request->field);
-    //     $entry = trim($request->entry);
-    //     $noentry = trim($request->noentry);
-    //     $condition = trim($request->condition);
-    //     $where = $this->getWhere($field, $entry, $noentry, $condition);
-    //     $results = DB::select('select * from '. $table. ' where '.$where, []);
-    //     return view('searchreturn',[
-    //                 'table' =>  $table,
-    //                 'results' => $results,
-    //                 'name' =>$this->getUserName()
-    //             ]);
-    // }
 
     public function search_flush(){
         $res = DB::table('organisation')
         ->paginate(20);
-        return view('searchreturn',[
+        return view('searchreturn_org',[
                     'table' =>'organisation',
-                    'results' => $res,
+                    'results2' => $res,
                     'name' =>$this->getUserName()
         ]);
     }
@@ -108,25 +149,28 @@ class SearchController extends Controller
     }
 
     public function search_admin(Request $request){
-        $field = trim($request->field);
-        $entry = trim($request->entry);
-        $noentry = trim($request->noentry);
-        $condition = trim($request->condition);
-        $where = $this->getWhere($field, $entry, $noentry, $condition);
-        // var_dump('select * from user where '.$where);die;
-        $res = DB::select('select * from user where '.$where, []);
-        // var_dump($res);
-        $loginUser = $this->getUser();
-        foreach($res as $v) {
-            if ($v->type == $loginUser->type){
-                session::flash('message', "Same level user can not edit");
-                break;
+        $fieldStr = trim($request->get('fieldStr'));
+        $fieldArr = json_decode($fieldStr, true);
+        $handle = DB::table('user');
+        foreach ($fieldArr as $key=>$val) {
+           if (isset($val['key']) && !empty($val['key'])) {
+               $condition = $val['condition'];
+               $entry = $val['entry'];
+               $noentry = $val['noentry'];
+               $entryArr = explode(',', $entry);
+               $noentryArr = explode(',', $noentry);
+               $field = $val['key'];
+               $this->setWhere($field, $entryArr, $noentryArr, $condition, $handle);
             }
-        }
+       }
+    
+       $results =  [];
+       $results =  $handle->get();
         return view('search_admin_return',[
-                    'results' => $res,
-                    'name' =>$this->getUserName()
-                ]);
+            'fieldArr' => $fieldArr,
+            'results' => $results,
+            'name' =>$this->getUserName()
+        ]);
     }
 
     public function search_admin_flush(){

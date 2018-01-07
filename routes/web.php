@@ -40,7 +40,7 @@ Route::get('match_org_name', 'OrganisationController@match_org_name');
 Route::get('search', 'SearchController@search');
 Route::get('searchreturn', 'SearchController@search');
 Route::get('search_flush', 'SearchController@search_flush');
-Route::post('search_admin', 'SearchController@search_admin');
+Route::get('search_admin', 'SearchController@search_admin');
 Route::get('search_admin_return', 'SearchController@search_admin_return');
 Route::get('search_contact_flush', 'SearchController@search_contact_flush');
 
