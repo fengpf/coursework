@@ -11,7 +11,7 @@ class SearchController extends Controller
 {
 
     private function setWhere($field, $entryArr, $noentryArr, $condition, $handle){
-        
+        // dump($field, $entryArr, $noentryArr);die;
         if (!empty($entryArr)) {
             if ($condition=='exact'){
                  foreach ($entryArr as $v) {
@@ -25,32 +25,33 @@ class SearchController extends Controller
                         $handle->where($field, 'like', '%' . $v . '%');
                      }
                  }
-            } elseif ($condition=='not') {
-                 foreach ($entryArr as $v) {
-                     if (!empty($v)) {
-                        $handle->where($field, 'not like', '%' . $v . '%');
-                     }
-                 }
-            }
+            } 
+            // elseif ($condition=='not') {
+            //      foreach ($entryArr as $v) {
+            //          if (!empty($v)) {
+            //             $handle->where($field, 'not like', '%' . $v . '%');
+            //          }
+            //      }
+            // }
         }
 
         if (!empty($noentryArr)) {
              if ($condition=='exact'){
                  foreach ($noentryArr as $v) {
                      if (!empty($v)) {
-                         $handle->where($field, '=', $v);
+                         $handle->where($field, '!=', $v);
                      }
                  }
              } elseif ($condition=='like') {
                  foreach ($noentryArr as $v) {
                      if (!empty($v)) {
-                        $handle->where($field, 'like', '%' . $v . '%');
+                        $handle->where($field, 'not like', '%' . $v . '%');
                      }
                  }
              } elseif ($condition=='not') {
                  foreach ($noentryArr as $v) {
                      if (!empty($v)) {
-                        $handle->where($field, 'not like', '%' . $v . '%');
+                        $handle->where($field, 'like', '%' . $v . '%');
                      }
                  }
              }
@@ -62,6 +63,9 @@ class SearchController extends Controller
         $fieldStr = trim($request->get('fieldStr'));
         // $checkStr = trim($request->get('checkStr'));
         $fieldArr = json_decode($fieldStr, true);
+        if (empty($fieldArr)) {
+            return redirect()->action('ContactController@data_search');
+        }
         $handle = DB::table('contact');
         $handle2 = DB::table('organisation');
         $queryOrg = false;
@@ -152,6 +156,10 @@ class SearchController extends Controller
         $fieldStr = trim($request->get('fieldStr'));
         $fieldArr = json_decode($fieldStr, true);
         $handle = DB::table('user');
+        // dump($fieldArr);die;
+        if (empty($fieldArr)) {
+            return redirect()->action('UserController@admin_search');
+        }
         foreach ($fieldArr as $key=>$val) {
            if (isset($val['key']) && !empty($val['key'])) {
                $condition = $val['condition'];

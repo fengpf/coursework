@@ -19,9 +19,9 @@
 -- Current Database: `govknow`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `qdm176766219_db` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `work` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `qdm176766219_db`;
+USE `work`;
 
 --
 -- Table structure for table `address`
