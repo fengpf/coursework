@@ -32,14 +32,56 @@ class ContactController extends Controller
     public  function  data_search(){
         return view('datasearch',['name' => $this->getUserName()]);
     }
-    
+   
+    public function batchadd_contact(Request $request){
+        if(!$this->check_permission()){
+            session::flash('message', "Session expired, login required");
+            return redirect()->action('HomeController@index');
+        }
+        $data=[];
+        foreach($request->recordType as $k=>$v){
+            $data[$k]['recordType']=$v;
+            $data[$k]['recordStatus']=$request->recordStatus[$k];
+            $data[$k]['instruction']=$request->instruction[$k];
+            $data[$k]['fname']=$request->fname[$k];
+            $data[$k]['lname']=$request->lname[$k];
+            $data[$k]['title']=$request->title[$k];
+            $data[$k]['jobtitle']=$request->jobtitle[$k];
+
+            $data[$k]['email']=$request->email[$k];
+            $data[$k]['telephone']=$request->telephone[$k];
+            $data[$k]['telephone2']=$request->telephone2[$k];
+            $data[$k]['mobile']=$request->mobile[$k];
+            $data[$k]['personType']=$request->personType[$k];
+            $data[$k]['organisation']=$request->organisation[$k];
+            $data[$k]['departmentLevel1']=$request->departmentLevel1[$k];
+            $data[$k]['linkedln']=$request->linkedln[$k];
+            $data[$k]['professionalInterest']=$request->professionalInterest[$k];
+            $data[$k]['biographyText']=$request->biographyText[$k];
+
+            $data[$k]['notes']=$request->notes[$k];
+            $data[$k]['postcode']=empty($request->postcode[$k])?0:0;
+            $data[$k]['region']=empty($request->region[$k])?'':'';
+            $data[$k]['country']=empty($request->country[$k])?'':'';
+            $data[$k]['created_at']=date('Y-m-d H:i:s');
+            $data[$k]['updated_at']=date('Y-m-d H:i:s');
+            $data[$k]['entry_time']=date('Y-m-d H:i:s');
+            
+        }
+        // dump($data);die;
+        DB::table('contact')->insert($data);
+        session::flash('message', "Contact import successfully");
+        $report = new Report;
+        $report->add_report($report, 1, 0, 0, $this->getMid());
+        return redirect()->action('DatauploadController@Index');
+    }
+
     public function add_contact(Request $request){
         if(!$this->check_permission()){
             session::flash('message', error_message("Session expired, login required"));
             return redirect()->action('HomeController@index');
         }
         $contact = new Contact;
-        $id = trim($request->id);
         $contact->recordType = trim($request->recordType);
         $contact->recordStatus = trim($request->recordStatus);
         $contact->instruction = trim($request->instruction);
@@ -63,9 +105,6 @@ class ContactController extends Controller
         $contact->biographyText = trim($request->biographyText);
         $contact->notes = trim($request->notes);
         $contact->entry_time = date('Y-m-d H:i:s');
-        // echo "<pre>";
-        // print_r($contact);
-      
         $contact->save();
         session::flash('message', "Contact added successfully");
         $report = new Report;

@@ -35,6 +35,34 @@ class OrganisationController extends Controller
              ]);
     }
     
+    public function batchadd_organisation(Request $request){
+        if(!$this->check_permission()){
+            session::flash('message', "Session expired, login required");
+            return redirect()->action('HomeController@index');
+        }
+        $data=[];
+        foreach($request->name as $k=>$v){
+            $data[$k]['name']=$v;
+            $data[$k]['orgType']=$request->orgType[$k];
+            $data[$k]['interestSectorAreas']=$request->interestSectorAreas[$k];
+            $data[$k]['twitter']=$request->twitter[$k];
+            $data[$k]['schoolLowerAge']=$request->schoolLowerAge[$k];
+            $data[$k]['schoolHigherAge']=$request->schoolHigherAge[$k];
+            $data[$k]['schoolURN']=$request->schoolURN[$k];
+            $data[$k]['notes']=$request->notes[$k];
+            $data[$k]['postcode']=empty($request->postcode[$k])?0:0;
+            $data[$k]['region']=empty($request->region[$k])?'':'';
+            $data[$k]['country']=empty($request->country[$k])?'':'';
+            $data[$k]['created_at']=date('Y-m-d H:i:s');
+            $data[$k]['updated_at']=date('Y-m-d H:i:s');
+        }
+        // dump($data);die;
+        DB::table('organisation')->insert($data);
+        session::flash('message', "Organisation import successfully");
+        $report = new Report;
+        $report->add_report($report, 1, 0, 0, $this->getMid());
+        return redirect()->action('DatauploadController@Index');
+    }
     
     public function add_organisation(Request $request){
         if(!$this->check_permission()){
@@ -43,6 +71,7 @@ class OrganisationController extends Controller
         }
         $organisation = new Organisation;
         $id = trim($request->id);
+        dump($request->name[0]);die;
         $organisation->name = trim($request->name);
         $organisation->orgType = trim($request->orgType);
         $organisation->interestSectorAreas = trim($request->interestSectorAreas);

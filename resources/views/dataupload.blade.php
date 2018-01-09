@@ -21,6 +21,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
  @extends('header')
+
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Example DataTables Card-->
@@ -30,9 +31,14 @@
           <font color="#000000">Data Upload</font> 
        </div>
 
-        <form action="<?php echo url('/'); ?>/csv" method="post" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" >
         <div class="card-body">
+            @if(Session::has('message'))                                            
+            <div class="alert alert-success">                                          
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{Session::get('message')}}
+            </div>  
+           @endif
             <div class="form-row">
                 <div class="col-md-6">
                     <label>Choose a file to upload</label>
@@ -45,30 +51,100 @@
                 <div class="col-md-12">
                   </br>
                   <label class="col-md-2">Save as:</label>
-                  <input type="checkbox" id="blankCheckbox" value="contact">
+                  <input type="checkbox" id="con_box" value="contact">
                   <label class="col-md-4">Contact</label>
-                  <input type="checkbox" id="blankCheckbox" value="organisation">
+                  <input type="checkbox" id="org_box" value="organisation">
                   <label class="col-md-4">Organisation</label>
               </div>
             </div>
             <div>
              </br> 
-             <button onclick="csv()"  type="button"   class = "btn btn-primary " data-toggle="modal" data-target="#exampleModal2">File Upload</button>
+             <button onclick="csv()"  type="button"   class = "btn btn-primary ">File Upload</button>
              </br>
-             <div id="resTbl" class="table-responsive"></div>
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                Uploaded Successfully
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
-                            </div>
-                        </div>
-                    </div>
+
+             <div id="con" class="table-responsive">
+                <form action="<?php echo url('/'); ?>/batchadd_contact" method="post">
+                     <table class='table table-bordered' width='100%' cellspacing='0'>
+                         <thead>
+                             <tr>
+                                <th>RecordType</th>
+                                <th>RecordStatus</th>
+                                <th>Instruction</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Title</th>
+                                <th>Email</th>
+                                <th>JobTitle</th>
+                                <th>Telephone</th>
+                                <th>Telephone2</th>
+                                <th>Mobile</th>
+                                <th>PersonType</th>
+                                <th>Organisation</th>
+                                <th>DepartmentLevel1</th>
+                                <th>Postcode</th>
+                                <th>Region</th>
+                                <th>Country</th>
+                                <th>Linkedin</th>
+                                <th>Professional Interest</th>
+                                <th>Biography Text</th>
+                                <th>Notes</th>
+                             </tr>
+                         </thead>
+                         <tbody></tbody>
+                     </table>
+                     <div class="form-row">
+                         <div class="col-md-1">
+                             </br><button type="submit"  class="btn btn-primary" data-toggle="modal" data-target="#save">
+                                 Save
+                             </button>
+                         </div>
+                     </div>
+                </form>
                </div>
+
+            <div id="org" class="table-responsive">
+             <form action="<?php echo url('/'); ?>/batchadd_organisation" method="post">
+                  <table class='table table-bordered' width='100%' cellspacing='0'>
+                      <thead>
+                          <tr>
+                              <th>Name</th>
+                              <th>Organisation type</th>
+                              <th>Interests and Sector Areas</th>
+                              <th>Post Code</th>
+                              <th>Region</th>
+                              <th>Country</th>
+                              <th>Twitter</th>
+                              <th>School Lower Age</th>
+                              <th>School Higher Age</th>
+                              <th>School URN or Similar</th>
+                              <th>Notes</th>
+                          </tr>
+                      </thead>
+                      <tbody></tbody>
+                  </table>
+                  <div class="form-row">
+                      <div class="col-md-1">
+                          </br><button type="submit"  class="btn btn-primary" data-toggle="modal" data-target="#save">
+                              Save
+                          </button>
+                      </div>
+                  </div>
+             </form>
+            </div>
+             
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-body">
+                              Uploaded Successfully
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
             </div>
         </div>
         </from>
@@ -110,7 +186,7 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
-    <script src="js/sb-admin-datatables.min.js"></script>
+    <!--<script src="js/sb-admin-datatables.min.js"></script>-->
     <!--<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
     <!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
     <!--<script src="https://cdn.bootcss.com/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>-->
@@ -119,20 +195,92 @@
     <script src="js/csv/import/jschardet.js"></script>
     <script src="js/csv/import/csv2arr.js"></script>
     <script>
-    function csv(){
-        $("input[name=csv_file]").csv2arr(function(arr){
-          console.log( arr );
-          //something to do here
-          var tblStr = "<table class='table table-bordered' width='100%' cellspacing='0'>";
-          $.each( arr, function(i, line){
-            tblStr += "<tr>";
-            $.each( line, function(i, cell){
-              tblStr += "<td width='120%'><input type='text' name="+cell+" value="+cell+ "></td>";
+
+        $("#con").hide();
+        $("#org").hide();
+        
+        function csv(){
+            var org = new Array(
+              "name",
+              "orgType",
+              "interestSectorAreas",
+              "postcode",
+              "region",
+              "country",
+              "twitter",
+              "schoolLowerAge",
+              "schoolHigherAge",
+              "schoolURN",
+              "notes"
+          );
+
+          var con = new Array(
+              "recordType",
+              "recordStatus",
+              "instruction",
+              "fname",
+              "lname",
+              "title",
+              "email",
+              "jobtitle",
+              "telephone",
+              "telephone2",
+              "mobile",
+              "personType",
+              "organisation",
+              "departmentLevel1",
+              "postcode",
+              "region",
+              "country",
+              "linkedln",
+              "professionalInterest",
+              "biographyText",
+              "notes"
+          );
+
+          var con_box =  document.getElementById("con_box").checked;
+          var org_box = document.getElementById("org_box").checked;
+          console.log(con_box, org_box);
+
+          if (!con_box && !org_box) {
+             alert("please select one table to upload!");
+             return;
+          }
+          
+          if (con_box) {
+            $("input[name=csv_file]").csv2arr(function(arr){
+              var tblStr = "";
+              $.each(arr, function(i, line){
+                if(i!=0){
+                    tblStr += "<tr>";
+                    $.each(line, function(j, cell){
+                      tblStr += "<td width='120%'><input type='text' name="+con[j]+"[]' value="+cell+ "></td>";
+                    });
+                    tblStr += "</tr>";
+                 }
+              });
+              $("#con table tbody").append(tblStr);
+              $("#con").show();
             });
-            tblStr += "</tr>";
-          });
-          $("#resTbl").html( tblStr );
-        });
+          }
+
+          if (org_box) {
+            $("input[name=csv_file]").csv2arr(function(arr){
+              var tblStr = "";
+              $.each(arr, function(i, line){
+                if(i!=0){
+                      tblStr += "<tr>";
+                      $.each(line, function(j, cell){
+                        tblStr += "<td width='120%'><input type='text' name="+org[j]+"[]' value="+cell+ "></td>";
+                      });
+                      tblStr += "</tr>";
+                }
+              });
+              $("#org table tbody").append(tblStr);
+              $("#org").show();
+            });
+          }
+          
       }
     </script>
   </div>

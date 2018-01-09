@@ -47,7 +47,7 @@
                             <label></br>ID</label>
                     </div>
                     <div class="col-md-6">
-                        <input type="hidden" name="id" value="<?php echo $user->id; ?>" >
+                        <?php echo $user->id; ?><input type="hidden" name="id" value="<?php echo $user->id; ?>" >
                     </div>
                 </div>
                 <div class="form-row">
@@ -82,7 +82,11 @@
                             <label></br>User Level</label>
                         </div>
                         <div class="col-md-6">
-                            </br><input type="hidden"  name="type" class="form-control" value="<?php echo $user->type; ?>">
+                            </br> <select name="type" aria-controls="dataTable" class="form-control form-control-sm">
+                                        <option value="0" "<?php if($user->type==0) {echo "selected = 'selected'";} ?> " >User</option>
+                                        <option value="1" "<?php if($user->type==1) {echo "selected = 'selected'";} ?> ">Admin</option>
+                                        <option value="2" "<?php if($user->type==2) {echo "selected = 'selected'";} ?> ">SuperAdmin</option>
+                                    </select>
                         </div>
                 </div>
 

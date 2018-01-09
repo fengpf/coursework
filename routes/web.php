@@ -25,6 +25,8 @@ Route::get('datasearch', 'ContactController@data_search');
 Route::get('edit_contact', 'ContactController@edit_contact');
 Route::get('delete_contact', 'ContactController@delete_contact');
 Route::post('update_contact', 'ContactController@update_contact');
+Route::post('batchadd_contact', 'ContactController@batchadd_contact');
+
 
 Route::get('organisation', 'OrganisationController@index');
 Route::post('add_organisation', 'OrganisationController@add_organisation');
@@ -34,6 +36,8 @@ Route::get('edit_organisation', 'OrganisationController@edit_organisation');
 Route::get('delete_organisation', 'OrganisationController@delete_organisation');
 Route::post('update_organisation', 'OrganisationController@update_organisation');
 Route::get('match_org_name', 'OrganisationController@match_org_name');
+Route::post('batchadd_organisation', 'OrganisationController@batchadd_organisation');
+
 
 
 //search

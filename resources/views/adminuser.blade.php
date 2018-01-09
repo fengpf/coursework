@@ -30,13 +30,14 @@
         <div class="card-header">
           <i class="fa fa-user"></i> User
         </div>
-        @if(Session::has('message'))                                            
-        <div class="alert alert-success">                                          
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {{Session::get('message')}}
-        </div>  
-       @endif
+       
         <div class="card-body">
+                @if(Session::has('message'))                                            
+                <div class="alert alert-success">                                          
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{Session::get('message')}}
+                </div>  
+               @endif
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
