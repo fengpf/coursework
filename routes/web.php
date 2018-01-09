@@ -58,6 +58,7 @@ Route::get('admin_search', 'UserController@admin_search');
 
 Route::get('dataupload','DatauploadController@Index');
 Route::get('dailyreport','DatauploadController@DailyReport');
+Route::get('dailyreportlist','DatauploadController@DailyReportList');
 Route::get('targetreport','DatauploadController@TargetReport');
 Route::post('targetreportreturn','DatauploadController@Targetreportreturn');
 Route::post('csv','DatauploadController@csv');

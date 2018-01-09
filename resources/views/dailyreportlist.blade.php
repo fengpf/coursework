@@ -33,7 +33,6 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>User</th>
                             <th>Date</th>
                             <th>Total Submissions</th>
                             <th>New</th>
@@ -43,23 +42,19 @@
                     </thead>
                     
                     <tbody>
-                        <?php foreach($report as $k=>$v) { ?>
+                        <?php foreach($report as $res) { ?>
                         <tr>
-                              <td>{{$name}}</td>
-                              <td>
-                                   <a href="<?php echo url('/'); ?>/dailyreportlist?date=<?php echo $k; ?>&sub=<?php echo $v['sub']; ?>" >
-                                      <?php echo $k; ?>
-                                   </a>
-                              </td>
-                              <td><?php echo $v['sub']; ?></td>
-                              <td><?php echo $v['new']; ?></td>
-                              <td><?php echo $v['up']; ?></td>
-                              <td><?php echo $v['del']; ?></td>
+                            <td><?php echo $res->entry_time; ?></td>
+                            <td><?php echo $sub; ?></td>
+                            <td><?php echo $res->new; ?></td>
+                            <td><?php echo $res->up; ?></td>
+                            <td><?php echo $res->del; ?></td>
                             </tr>
                         <?php } ?>
                     </tbody>
                 
                 </table>
+                {{ $report->appends(['date' =>$date, 'sub' =>$sub])->links() }}
             </div>
         </div>
         </div>

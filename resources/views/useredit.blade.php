@@ -36,28 +36,35 @@
                 {{Session::get('message')}}
             </div>  
         @endif
+
+        <form action="<?php echo url('/'); ?>/update_user" method="post">
+        <?php echo method_field('POST'); ?>
+        <?php echo csrf_field(); ?>
         <div class="card-body">
              <div class="table-responsive">
                 <div class="form-row" >
-                        <div class="col-md-6">
-                            <input type="hidden" id="id" value="<?php echo $user->id; ?>" >
-                        </div>
-                        </div>
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <label></br>Email/Username</label>
-                        </div>
-                        <div class="col-md-6">
-                            </br><input class="form-control" id="email" value="<?php echo $user->email; ?>" >
-                                </div>
-                        </div>
+                    <div class="col-md-6">
+                            <label></br>ID</label>
                     </div>
+                    <div class="col-md-6">
+                        <input type="hidden" name="id" value="<?php echo $user->id; ?>" >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label></br>Email/Username</label>
+                    </div>
+                    <div class="col-md-6">
+                        </br><input class="form-control" name="email" value="<?php echo $user->email; ?>" >
+                            </div>
+                    </div>
+                </div>
                 <div class="form-row">
                     <div class="col-md-6">
                         <label></br>First Name</label>
                     </div>
                     <div class="col-md-6">
-                        </br><input class="form-control" id="fname" value="<?php echo $user->fname; ?>">
+                        </br><input class="form-control" name="fname" value="<?php echo $user->fname; ?>">
                     </div>
                 </div>
 
@@ -66,16 +73,25 @@
                         <label></br>Last Name</label>
                     </div>
                     <div class="col-md-6">
-                        </br><input class="form-control" id="lname" value="<?php echo $user->lname; ?>">
+                        </br><input class="form-control" name="lname" value="<?php echo $user->lname; ?>">
                     </div>
                 </div>
 
-              <!--  <div class="form-row">
+                <div class="form-row">
+                        <div class="col-md-6">
+                            <label></br>User Level</label>
+                        </div>
+                        <div class="col-md-6">
+                            </br><input type="hidden"  name="type" class="form-control" value="<?php echo $user->type; ?>">
+                        </div>
+                </div>
+
+              <div class="form-row">
                     <div class="col-md-6">
                         </br><label>Reset Password</label>
                     </div>
                     <div class="col-md-6">
-                        </br><input class="form-control" id="password" type="password" value="<?php echo $user->password; ?>" >
+                        </br><input class="form-control" name="password" type="password" value="<?php echo $user->password; ?>" >
                     </div>
                 </div>
                 
@@ -84,24 +100,29 @@
                         </br><label>Active</label>
                     </div>
                     <div class="col-md-6">
-                        </br><input type="checkbox" id="active" class="checkbox"  <?php if($user->active) {echo "checked";} ?> ></label>
+                        </br><input type="checkbox" name="active" class="checkbox"  <?php if($user->active) {echo "checked";} ?> ></label>
                     </div>
-                </div> -->
-         <?php echo method_field('POST'); ?>
-         <?php echo csrf_field(); ?>
-         <input type="hidden" id="token" name="_token" value="<?php echo csrf_token(); ?>" >
-        <div class="form-row">
-            <div class="col-md-1">
-                </br><button onclick="update_user()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#save">
-                    Save
-                </button>
+                </div>
+        
+
+             <div class="form-row">
+                <div class="col-md-1">
+                    </br><button type="submit"  class="btn btn-primary" data-toggle="modal" data-target="#save">
+                        Save
+                    </button>
+                </div>
+                <div class="col-md-1">
+                    </br><button onclick="cancel()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#cancel">
+                        Cancel
+                    </button>
                 </div>
             </div>
-            </div>
+         </div>
         </div>
         </div>
         </div>
-        </div>
+    </form>
+  </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <!-- Scroll to Top Button-->
@@ -148,34 +169,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     
     <script>
-     function update_user() {
-		var formData = new FormData();
-        _token = $("#token").val();
-		id = $("#id").val();
-		fname = $("#fname").val();
-		lname = $("#lname").val();
-		email = $("#email").val();
-		password = $("#password").val();
-		type = $("#type").val();
-		active = $("#active").val();
-		formData.append("_token", _token);
-       // console.log(_token);
-		formData.append("id", id);
-		formData.append("fname", fname);
-		formData.append("lname", lname);
-		formData.append("email", email);
-		formData.append("password", password);
-		formData.append("type", type);
-		formData.append("active", active);
-		$.ajax({
-			url: "<?php echo url('/'); ?>/update_user",
-			type: "POST",
-			data: formData,
-			dataType: 'json',
-			contentType: false,
-			processData: false,
-			timeout : 2000
-		})
+        function cancel(){
+            window.history.go(-1);
+        }
+
+       function update_user() {
+            var formData = new FormData();
+            _token = $("#token").val();
+            id = $("#id").val();
+            fname = $("#fname").val();
+            lname = $("#lname").val();
+            email = $("#email").val();
+            password = $("#password").val();
+            type = $("#type").val();
+            active = $("#active").val();
+            formData.append("_token", _token);
+        // console.log(_token);
+            formData.append("id", id);
+            formData.append("fname", fname);
+            formData.append("lname", lname);
+            formData.append("email", email);
+            formData.append("password", password);
+            formData.append("type", type);
+            formData.append("active", active);
+            $.ajax({
+                    url: "<?php echo url('/'); ?>/update_user",
+                    type: "POST",
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    timeout : 2000
+            })
 		.done(function (data) {
 			// 请求成功后要做的工作
             //alert(data.msg);

@@ -33,6 +33,7 @@
        <?php echo method_field('POST'); ?>
         <?php echo csrf_field(); ?>
         <input type="hidden"  name="id" value="<?php echo $org->id; ?>" >
+        <input type="hidden" name="fieldStr" value="{{$fieldStr}}" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
         <div class="card-body">
           <div class="table-responsive">
               <div class="form-row">

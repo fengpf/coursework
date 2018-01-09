@@ -92,36 +92,34 @@ class UserController extends Controller
         $data['fname'] = trim($request->fname);
         $data['lname'] = trim($request->lname);
         $data['email'] = trim($request->email);
-        // $data['password'] = sha1(trim($request->password));
-        // $data['type'] = intval(trim($request->type));
-        // if (trim($request->active)=='on'){
-        //     $data['active'] = 1;
-        // }else{
-        //     $data['active'] = 0;
-        // }
+        $data['password'] = sha1(trim($request->password));
+        $data['type'] = intval(trim($request->type));
+        if (trim($request->active)=='on'){
+            $data['active'] = 1;
+        }else{
+            $data['active'] = 0;
+        }
         $data['entry_time'] = date('Y-m-d H:i:s');
-        // switch ($user->type) {
-        //     case 0:
-        //         $data['role_id']=0;
-        //         break;
-        //     case 1:
-        //         $data['role_id']=1;
-        //         break;
-        //     case 2:
-        //         $data['role_id']=2;
-        //         break;
-        //     default:
-        //         break;
-        // }
+        switch ($user->type) {
+            case 0:
+                $data['role_id']=0;
+                break;
+            case 1:
+                $data['role_id']=1;
+                break;
+            case 2:
+                $data['role_id']=2;
+                break;
+            default:
+                break;
+        }
         $res=$user->where("id", $id)->update($data);
         // var_dump($res);
         if ($res) {
             $report = new Report;
             $report->add_report($report, 0, 1, 0, $this->getMid());
-            echo json_encode(['code'=>0, 'msg'=>"update success"]);
-        }else {
-            echo json_encode(['code'=>0, 'msg'=>"update fail"]);
         }
+        return redirect()->action('UserController@admin_user');
     }
     
     
@@ -133,10 +131,10 @@ class UserController extends Controller
         $id=$request->get('id');
         $user = DB::table('user')->where('id', $id)->first();
         $loginUser = $this->getUser();
-        if ($user->type == $loginUser->type){
-            session::flash('message', "login user can not be delete");
-            return redirect()->action('UserController@admin_user');
-        }
+        // if ($user->type == $loginUser->type){
+        //     session::flash('message', "login user can not be delete");
+        //     return redirect()->action('UserController@admin_user');
+        // }
         $res = DB::delete('delete from user where id = ?',[$id]);
          // var_dump($res);
         if ($res) {
@@ -154,10 +152,10 @@ class UserController extends Controller
         $id=$request->get('id');
         $user = DB::table('user')->where('id', $id)->first();
         $loginUser = $this->getUser();
-        if ($user->type == $loginUser->type){
-            session::flash('message', "Same level user can not edit");
-            return redirect()->action('UserController@admin_user');
-        }
+        // if ($user->type == $loginUser->type){
+        //     session::flash('message', "Same level user can not edit");
+        //     return redirect()->action('UserController@admin_user');
+        // }
         return view('useredit', [
             'user' => $user,
             'name' =>$this->getUserName()

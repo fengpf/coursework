@@ -14,7 +14,7 @@ return [
     */
 
     'default' => env('DB_CONNECTION', 'mysql'),
-
+    'sql_debug' => 1, //为1输出所有执行的sql语句
     /*
     |--------------------------------------------------------------------------
     | Database Connections

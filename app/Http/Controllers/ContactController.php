@@ -80,20 +80,21 @@ class ContactController extends Controller
             return redirect()->action('HomeController@index');
         }
         $id=$request->get('id');
+        $fieldStr=$request->get('fieldStr');
         $con = DB::table('contact')->where('id', $id)->first();
         // echo "<pre>";
         // var_dump($id, $org);die;
         if (empty($con)) {
             session::flash('message','do not exist the contact id!');
-            return redirect()->action('SearchController@search_flush');
+            return redirect()->action('SearchController@search', ['fieldStr'=>$fieldStr]);
         }
         return view('edit_contact', [
+            'fieldStr' => $fieldStr,
             'table' =>'contact',
             'con' => $con,
             'name' => $this->getUserName()
         ]);
     }
-   
     
     public function update_contact(Request $request){
         if(!$this->check_permission()){
@@ -103,17 +104,21 @@ class ContactController extends Controller
         $contact = new Contact;
         $id = trim($request->id);
         $data['instruction'] = trim($request->instruction);
+        $data['title']  = trim($request->title);
+        $data['fname']  = trim($request->fname);
+        $data['lname']  = trim($request->lname);
         $data['jobtitle']  = trim($request->jobtitle);
-        $data['personType']  = trim($request->personType);
+        $data['email']  = trim($request->email);
         $data['organisation']  = trim($request->organisation);
-        $data['region']  = trim($request->region);
-        $data['country']  = trim($request->country);
+        $data['departmentLevel1']  = trim($request->departmentLevel1);
+        $data['dapartmentLevel2']  = trim($request->dapartmentLevel2);
         $res=$contact->where("id", $id)->update($data);
         if ($res) {
             $report = new Report;
             $report->add_report($report, 0, 1, 0, $this->getMid());
         }
-        return redirect()->action('SearchController@search_contact_flush');
+        $fieldStr = $request->input('fieldStr');  
+        return redirect()->action('SearchController@search', ['fieldStr'=>$fieldStr]);
     }
 
     public function delete_contact(Request $request){
@@ -122,14 +127,13 @@ class ContactController extends Controller
             return redirect()->action('HomeController@index');
         }
         $id=$request->get('id');
-        // var_dump($id);die;
+        $fieldStr=$request->get('fieldStr');
         $res = DB::delete('delete from contact where id = ?',[$id]);
-         // var_dump($res);
          if ($res) {
             $report = new Report;
             $report->add_report($report, 0, 0, 1, $this->getMid());
         }
-        return redirect()->action('SearchController@search_contact_flush');
+        return redirect()->action('SearchController@search', ['fieldStr'=>$fieldStr]);
     }
 
 }

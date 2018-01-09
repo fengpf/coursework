@@ -94,9 +94,13 @@
                         <?php } ?>
                     </tbody>
                 </table>
+           {{ $users->links() }}
             </div><a class="btn btn-primary" href="/adduser" role="button">Add</a>
+           
         </div>
+           
         </div>
+        
       </div>
     </div>
     <!-- /.container-fluid-->

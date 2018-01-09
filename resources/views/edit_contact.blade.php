@@ -33,6 +33,7 @@
        <?php echo method_field('POST'); ?>
         <?php echo csrf_field(); ?>
         <input type="hidden"  name="id" value="<?php echo $con->id; ?>" >
+        <input type="hidden" name="fieldStr" value="{{$fieldStr}}" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
        
         @if(Session::has('message'))                                            
         <div class="alert alert-success">                                          
@@ -45,47 +46,68 @@
           <div class="table-responsive">
               <div class="form-row">
                   <div class="col-sm-6">
-                      <label for="InputName"></br>instruction</label>
+                      <label for="InputName"></br>Instruction</label>
                       <input name="instruction" value="<?php echo $con->instruction; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
                  </div>
               </div>
         
               <div class="form-row">
                 <div class="col-sm-6">
-                    <label ></br>jobtitle</label>
+                    <label ></br>Title</label>
+                    <input name="title" value="<?php echo $con->title; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-sm-6">
+                    <label ></br>First Name</label>
+                    <input name="fname" value="<?php echo $con->fname; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                </div> 
+            </div>
+
+            <div class="form-row">
+                  <div class="col-sm-6">
+                      <label ></br>Last Name</label>
+                      <input name="lname" value="<?php echo $con->lname;?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                  </div> 
+            </div>
+
+              <div class="form-row">
+                <div class="col-sm-6">
+                    <label ></br>Job Title</label>
                     <input name="jobtitle" value="<?php echo $con->jobtitle; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
                 </div>
               </div>
-            
-
+              
               <div class="form-row">
                 <div class="col-sm-6">
-                    <label ></br>personType</label>
-                    <input name="personType" value="<?php echo $con->personType; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                    <label ></br>Email</label>
+                    <input name="email" value="<?php echo $con->email; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
                 </div>
               </div>
-              
 
               <div class="form-row">
                 <div class="col-sm-6">
-                    <label ></br>organisation</label>
+                    <label ></br>Organisation</label>
                     <input name="organisation" value="<?php echo $con->organisation; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
                 </div> 
               </div>
 
               <div class="form-row">
-                  <div class="col-sm-6">
-                      <label ></br>region</label>
-                      <input name="region" value="<?php echo $con->region; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
-                  </div> 
+                <div class="col-sm-6">
+                    <label ></br>Department Level 1</label>
+                    <input name="departmentLevel1" value="<?php echo $con->departmentLevel1; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                </div> 
               </div>
 
               <div class="form-row">
-                    <div class="col-sm-6">
-                        <label ></br>country</label>
-                        <input name="country" value="<?php echo $con->country;?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
-                    </div> 
+                <div class="col-sm-6">
+                    <label ></br>Department Level 2</label>
+                    <input name="dapartmentLevel2" value="<?php echo $con->dapartmentLevel2; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                </div> 
               </div>
+
+              
               
               </div>
               </br>

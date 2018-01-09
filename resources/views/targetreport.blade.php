@@ -38,9 +38,9 @@
                 <table class="table table-bordered col-md-12" id="dataTable" width="100%" cellspacing="0">
                     <tr>
                         <td width="40%"rowspan=$rowspan style='vertical-align: middle;text-align: center;'>
-                            user:
+                         <br/>user:
                         <div class="form-group ">
-                               <select name="name" aria-controls="dataTable" class="form-control form-control-sm">
+                               <select style="height:38px" name="name" aria-controls="dataTable" class="form-control form-control-sm">
                                   <?php foreach($users as $s) {?>
                                         <option value="<?php echo $s->fname; ?>"><?php echo $s->fname; ?></option>
                                   <?php }?>

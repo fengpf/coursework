@@ -26,6 +26,12 @@
                     <span class="nav-link-text">Data Search</span>
                 </a>
             </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Data Search">
+                <a class="nav-link " href="/admin_search">
+                    <i class="fa fa-fw fa-file"></i>
+                    <span class="nav-link-text">Admin Search</span>
+                </a>
+            </li>
 
             <?php if(Session::has('superadmin_login') || Session::has('admin_login')) { ?>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Admin">
@@ -39,9 +45,6 @@
                         </li>-->
                         <li>
                             <a href="/adminuser">Users</a>
-                        </li>
-                        <li>
-                            <a href="/admin_search">Admin Search</a>
                         </li>
                         <li>
                             <a href="/dataupload">Data Upload</a>

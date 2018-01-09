@@ -68,7 +68,6 @@
                         <select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
-                            <option value="not">not</option>
                         </select>
                     </div>
                 </div>
@@ -89,7 +88,6 @@
                         </br><select name="condition"  aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
-                            <option value="not">not</option>
                         </select>
                     </div>
 
@@ -108,7 +106,7 @@
                     </div>
                     <div class="col-sm-3 offset-sm-1 ">
                         </br>
-                            <select name="entry" style="width:180px;">
+                            <select name="entry" name="entry" class="chosen-select " multiple  style="width:180px;">
                             <option value="deceased">Deceased</option>
                             <option value="left-retired">Left-Retired</option>
                             <option value="left-other">Left-Other</option>
@@ -124,7 +122,6 @@
                         </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
-                            <option value="not">not</option>
                         </select>
                     </div>
 
@@ -146,7 +143,6 @@
                         </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
-                            <option value="not">not</option>
                         </select>
                     </div>
                 </div>
@@ -158,7 +154,7 @@
                         </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="persontype">
                     </label>
                     <div class="col-sm-3 offset-sm-1">
-                        </br><select name="entry" style="width:180px;">
+                        </br><select name="entry" name="entry" class="chosen-select "  multiple  style="width:180px;">
                             <option value="academic - lecturer">Academic - Lecturer</option>
                             <option value="academic - researcher">Academic - Researcher</option>
                             <option value="academic - senior management">Academic - Senior Management</option>
@@ -222,7 +218,6 @@
                         </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
-                            <option value="not">not</option>
                         </select>
                     </div>
                 </div>
@@ -246,7 +241,6 @@
                         </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
-                            <option value="not">not</option>
                         </select>
                     </div>
                 </div>
@@ -267,7 +261,6 @@
                         </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
-                            <option value="not">not</option>
                         </select>
                     </div>
                 </div>
@@ -288,7 +281,6 @@
                         </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
-                            <option value="not">not</option>
                         </select>
                     </div>
                 </div>
@@ -309,7 +301,6 @@
                         </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
-                            <option value="not">not</option>
                         </select>
                     </div>
                 </div>
@@ -321,7 +312,7 @@
                         </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="orgtype">
                     </label>
                     <div class="col-sm-3 offset-sm-1">
-                        </br><select name="entry" style="width:180px;">
+                        </br><select name="entry" name="entry" class="chosen-select "  multiple  style="width:180px;">
                             <option value="banks">Banks</option>
                             <option value="central government">Central Government</option>
                             <option value="charity/voluntary(philanthropic)">Charity/Voluntary(Philanthropic)</option>
@@ -355,7 +346,6 @@
                         </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
-                            <option value="not">not</option>
                         </select>
                     </div>
                 </div>
@@ -402,7 +392,6 @@
                         </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
-                            <option value="not">not</option>
                         </select>
                     </div>
                 </div>
@@ -417,7 +406,7 @@
                         </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="region">
                     </label>
                     <div class="col-sm-3 ">
-                        </br><select name="entry" style="width:180px;">
+                        </br><select name="entry" name="entry" class="chosen-select "  multiple  style="width:180px;">
                             <option value="east of england">England</option>
                             <option value="east midlands">East Midlands</option>
                             <option value="london">London</option>
@@ -441,7 +430,6 @@
                         </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
-                            <option value="not">not</option>
                         </select>
                     </div>
                 </div>
@@ -462,7 +450,6 @@
                         </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
-                            <option value="not">not</option>
                         </select>
                     </div>
                 </div>
@@ -486,7 +473,6 @@
                         </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
-                            <option value="not">not</option>
                         </select>
                     </div>
                 </div>
@@ -507,7 +493,6 @@
                         </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
-                            <option value="not">not</option>
                         </select>
                     </div>
             </div>
@@ -528,7 +513,6 @@
                         </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
-                            <option value="not">not</option>
                         </select>
                     </div>
             </div>
@@ -549,7 +533,6 @@
                         </br><select name="condition" aria-controls="dataTable">
                             <option value="exact">exact</option>
                             <option value="like">like</option>
-                            <option value="not">not</option>
                         </select>
                     </div>
             </div>
@@ -613,6 +596,10 @@
     <script type="text/javascript" src="js/csv/tableExport.js"></script>
     <script>
         $('.chosen-select').chosen({width:"100%"} );
+        $('.chosen-select').on('change', function(e, params) {
+            console.log(params.selected);            
+            //do_something(e, params);
+        });
         $("#search-result").hide();
         $("#search-condition").hide();
         
@@ -649,6 +636,16 @@
                   var list2=document.getElementById(key).getElementsByTagName("select");
                   for(var k=0; k<list2.length;k++)
                   {
+                        if(list2[k].name=="entry")   
+                        {
+                            var entryArr=[];
+                            $("#"+key+" .chosen-choices li span").each(function(i){
+                                console.log($(this).text().toLowerCase());
+                                entryArr[i]=$(this).text().toLowerCase();
+                            });
+                            console.log(entryArr);
+                            obj.entry=entryArr.join(",");
+                        }
                         if(list2[k].name=="condition")   
                         {
                            obj.condition=list2[k].value;

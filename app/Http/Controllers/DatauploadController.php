@@ -7,6 +7,7 @@ use App\Dataupload;
 use App\Organisation;
 use DB;
 use Session;
+use Illuminate\Support\Collection;
 
 class DatauploadController extends Controller
 {    
@@ -35,30 +36,74 @@ class DatauploadController extends Controller
     }
 
     public  function DailyReport(Request $request){
-        $date = trim($request->date);
-        if ($date != ""){
-            $report = DB::table('report')
-            ->where('entry_time', '=', $date)
-            ->get();
-            // var_dump($report);
-        } else {
-            $report = DB::table('report')
+        $report = DB::table('report')
             ->orderBy('id', 'desc')
-            ->paginate(10);
+            ->get();
+        // dump($report);die;
+        foreach($report as $k=>$v) {
+            $entryTime = strtotime($v->entry_time);
+            $createdAtTime = strtotime($v->created_at);
+            $updatedAtTime = strtotime($v->updated_at);
+            $entryTimeStr = date('Y-m-d', $entryTime);
+            $createdAtTimeStr = date('Y-m-d', $createdAtTime);
+            $updatedAtTimeStr = date('Y-m-d', $updatedAtTime);
+            $v->entry_time =  $entryTimeStr;
+            $v->created_at =  $createdAtTimeStr;
+            $v->updated_at =  $updatedAtTimeStr;
+            $report[$k] =  $v;
         }
-        $new=0;
-        $up=0;
-        $del=0;
-        $sub=0;
-        foreach($report as $res) {
-            $new+=$res->new;
-            $up+=$res->up;
-            $del+=$res->del;
+        // dump($report->items());
+        $temp = [];
+        foreach($report as $k=>$v) {
+            $temp[$v->entry_time][$k] = $v;
         }
-        $sub=$new+$up-$del;
-        // var_dump($new,$up,$del,$sub); die;
-        // var_dump($report);die;
+        $temp2 = [];
+        foreach($temp as $k=>$v) {
+            $new = $up = $del= 0;
+            foreach($v as $kk=>$vv) {
+                $new+=$vv->new;
+                $up+=$vv->up;
+                $del+=$vv->del;
+            }
+            $temp2[$k]['new']=$new;
+            $temp2[$k]['up']=$up;
+            $temp2[$k]['del']=$del;
+            $temp2[$k]['sub']=$new + $up - $del;
+        }
+        // dump($temp2);die;
         return view('dailyreport',[
+            'report' => $temp2,
+            'name' =>$this->getUserName()
+        ]);
+    }
+
+    public  function DailyReportList(Request $request){
+        $sub = trim($request->sub);
+        $date = trim($request->date);
+        $start = strtotime($date);
+        $end = strtotime($date) + 86400;  
+        $startStr=date('Y-m-d H:i:s', $start);
+        $endStr=date('Y-m-d H:i:s', $end);
+        // dump($date,$startStr, $endStr);die;
+        $report = DB::table('report')
+        ->where('entry_time', '>=', $startStr)
+        ->where('entry_time', '<=', $endStr)
+        ->paginate(10);
+        foreach($report->items() as $k=>$v) {
+            $entryTime = strtotime($v->entry_time);
+            $createdAtTime = strtotime($v->created_at);
+            $updatedAtTime = strtotime($v->updated_at);
+            $entryTimeStr = date('Y-m-d', $entryTime);
+            $createdAtTimeStr = date('Y-m-d', $createdAtTime);
+            $updatedAtTimeStr = date('Y-m-d', $updatedAtTime);
+            $v->entry_time =  $entryTimeStr;
+            $v->created_at =  $createdAtTimeStr;
+            $v->updated_at =  $updatedAtTimeStr;
+            $report->items()[$k] =  $v;
+        }
+        // dump($report);die;
+        return view('dailyreportlist',[
+            'date' => $date,
             'report' => $report,
             'sub' => $sub,
             'name' =>$this->getUserName()
@@ -68,7 +113,7 @@ class DatauploadController extends Controller
     public  function TargetReport(){
         $user = DB::table('user')
         ->orderBy('id', 'desc')
-        ->paginate(10);
+        ->get();
         return view('targetreport',[
             'users'=>$user,
             'name' =>$this->getUserName()
@@ -78,33 +123,47 @@ class DatauploadController extends Controller
     public  function Targetreportreturn(Request $request){
         $start = trim($request->start);
         $end = trim($request->end);
+        $startStr=date('Y-m-d H:i:s', strtotime($start));
+        $endStr=date('Y-m-d H:i:s', strtotime($end) + 86400);
         $name = trim($request->name);
-        // var_dump(session::get('superadmin_id')[0]);die;
-        $report = [];
         $user = DB::table('user')->where('fname', $name)->first();
-        // var_dump($user,$name);die;
-        $report = DB::select('select * from report where mid = :mid 
-        and entry_time >=:start and entry_time <=:end', 
-           [
-               'mid' =>$user->id,
-               'start' =>$start,
-               'end' => $end
-        ]);
+        $report = DB::table('report')
+            ->where('mid', '=', $user->id)
+            ->where('entry_time', '>=', $startStr)
+            ->where('entry_time', '<=', $endStr)
+            ->get();
 
-        $new=0;
-        $up=0;
-        $del=0;
-        $sub=0;
-        foreach($report as $res) {
-            $new+=$res->new;
-            $up+=$res->up;
-            $del+=$res->del;
+        foreach($report as $k=>$v) {
+            $entryTime = strtotime($v->entry_time);
+            $createdAtTime = strtotime($v->created_at);
+            $updatedAtTime = strtotime($v->updated_at);
+            $entryTimeStr = date('Y-m-d', $entryTime);
+            $createdAtTimeStr = date('Y-m-d', $createdAtTime);
+            $updatedAtTimeStr = date('Y-m-d', $updatedAtTime);
+            $v->entry_time =  $entryTimeStr;
+            $v->created_at =  $createdAtTimeStr;
+            $v->updated_at =  $updatedAtTimeStr;
+            $report[$k] =  $v;
         }
-        $sub=$new+$up-$del;
-        // var_dump($mid, $report,$start,$end);die;
+        $temp = [];
+        foreach($report as $k=>$v) {
+            $temp[$v->entry_time][$k] = $v;
+        }
+        $temp2 = [];
+        foreach($temp as $k=>$v) {
+            $new = $up = $del= 0;
+            foreach($v as $kk=>$vv) {
+                $new+=$vv->new;
+                $up+=$vv->up;
+                $del+=$vv->del;
+            }
+            $temp2[$k]['new']=$new;
+            $temp2[$k]['up']=$up;
+            $temp2[$k]['del']=$del;
+            $temp2[$k]['sub']=$new + $up - $del;
+        }
         return view('dailyreport',[
-            'report' => $report,
-            'sub' => $sub,
+            'report' => $temp2,
             'name' =>$this->getUserName()
         ]);
     }

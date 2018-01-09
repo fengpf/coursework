@@ -91,17 +91,15 @@
                 <thead>
                         <tr>
                             <th>ID</th>
-                            <th>RecordType</th>
                             <th>Instruction</th>
+                            <th>Title</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
                             <th>Job Title</th>
-                            <th>Person Type</th>
-                            <th>Professional Interests</th>
+                            <th>Email</th>
                             <th>Organisation</th>
                             <th>Department Level 1</th>
                             <th>Department Level 2</th>
-                            <th>Country</th>
-                            <th>Region</th>
-                            <th>Action</th>
                         </tr>
                 </thead>
 
@@ -112,40 +110,38 @@
                                  <?php echo $res->id; ?>
                               </td>
                               <td>
-                                    <?php echo $res->recordType; ?>
+                                    <?php echo $res->instruction; ?>
                              </td>
                               <td>
-                                 <?php echo $res->instruction; ?>
+                                 <?php echo $res->title; ?>
                               </td>
                               <td>
-                                 <?php echo $res->jobtitle; ?>
+                                 <?php echo $res->fname; ?>
                               </td>
                               <td>
-                                  <?php echo $res->personType; ?>
+                                  <?php echo $res->lname; ?>
                               </td>
                               <td>
-                                  <?php echo $res->professionalInterest; ?>
+                                  <?php echo $res->jobtitle; ?>
                              </td>
                              <td>
-                                    <?php echo $res->organisation; ?>
-                            </td>
-                            <td>
-                                    <?php echo $res->departmentLevel1; ?>
-                            </td>
-                            <td>
-                                    <?php echo $res->dapartmentLevel2; ?>
+                                    <?php echo $res->email; ?>
                             </td>
 
                              <td>
-                                    <?php echo $res->region; ?>
+                                    <?php echo $res->organisation; ?>
+                            </td>
+                             <td>
+                                    <?php echo $res->departmentLevel1; ?>
                              </td>
                              <td>
-                                    <?php echo $res->country; ?>
+                                    <?php echo $res->dapartmentLevel2; ?>
                              </td>
+        
                               <td>
-                                  <a id="edit" href="/edit_contact?id=<?php echo $res->id; ?>" />
+                                  <a id="edit" href="/edit_contact?id=<?php echo $res->id; ?>&fieldStr={{$fieldStr}}" />
                                       <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                  <a id="delete" href="/delete_contact?id=<?php echo $res->id; ?>" />
+                                  <a id="delete" href="/delete_contact?id=<?php echo $res->id; ?>&fieldStr={{$fieldStr}}" />
                                       <i class="fa fa-trash-o offset-md-3" aria-hidden="true"></i></a>
                                   <!-- Modal -->
                                   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
@@ -171,6 +167,7 @@
                         <button onclick="exportCSV2()" type="button" class="btn btn-primary" role="button">Export</a>
                     </div>
             </div></br>
+           {{ $results->appends(['fieldStr' =>$fieldStr])->links() }}
             @endif
 
         </div>
@@ -222,45 +219,7 @@
       function exportCSV2() {
         $('#search-contact').tableExport({type:'csv'});
       }
-
-        function del_contact() {
-            var formData = new FormData();
-                _token = $("#token").val();
-            id = $(".modal-footer #del_id").val();
-            formData.append("_token", _token);
-            formData.append("id", id);
-                console.log(id);
-            $.ajax({
-              url: "<?php echo url('/'); ?>/delete_contact",
-              type: "POST",
-              data: formData,
-              dataType: 'json',
-              contentType: false,
-              processData: false,
-              timeout : 2000
-            })
-            .done(function (data) {
-              // 请求成功后要做的工作
-                    //alert(data.msg);
-                    if (data.code==0){
-                      console.log("success");
-                      window.location.href="<?php echo url('/'); ?>/search_contact_flush"; 
-                    }
-            })
-            .fail(function (xhr) {
-              // 请求失败后要做的工作
-              console.log('fail:' + JSON.stringify(xhr));
-            })
-            .error(function (xhr) {
-              console.log('error:' + xhr.responseText);
-            })
-            .always(function () {
-              // 不管成功或失败都要做的工作
-              //console.log('complete');
-            });
-            return false;
-            }
-    </script>
+     </script>
   </div>
 </body>
 

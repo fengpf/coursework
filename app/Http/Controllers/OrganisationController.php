@@ -71,14 +71,16 @@ class OrganisationController extends Controller
             return redirect()->action('HomeController@index');
         }
         $id=$request->get('id');
+        $fieldStr=$request->get('fieldStr');
         $org = DB::table('organisation')->where('id', $id)->first();
         // echo "<pre>";
         // var_dump($id, $org);die;
         if (empty($org)) {
             session::flash('message','do not exist the organisation id!');
-            return redirect()->action('SearchController@search_flush');
+            return redirect()->action('SearchController@search',['fieldStr'=>$fieldStr]);
         }
         return view('edit_org', [
+            'fieldStr' => $fieldStr,
             'table' =>'organisation',
             'org' => $org,
             'name' => $this->getUserName()
@@ -101,8 +103,9 @@ class OrganisationController extends Controller
         if ($res) {
             $report = new Report;
             $report->add_report($report, 0, 1, 0, $this->getMid());
-            return redirect()->action('SearchController@search_flush');
         }
+        $fieldStr = $request->input('fieldStr');  
+        return redirect()->action('SearchController@search',['fieldStr'=>$fieldStr]);
     }
 
     public function delete_organisation(Request $request){
@@ -111,14 +114,13 @@ class OrganisationController extends Controller
             return redirect()->action('HomeController@index');
         }
         $id=$request->get('id');
-        // var_dump($id);die;
+        $fieldStr=$request->get('fieldStr');
         $res = DB::delete('delete from organisation where id = ?',[$id]);
-         // var_dump($res);
          if ($res) {
             $report = new Report;
             $report->add_report($report, 0, 0, 1, $this->getMid());
         }
-        return redirect()->action('SearchController@search_flush');
+        return redirect()->action('SearchController@search',['fieldStr'=>$fieldStr]);
     }
 
     public function match_org_name(Request $request) {

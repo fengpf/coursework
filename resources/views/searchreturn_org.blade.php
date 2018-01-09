@@ -130,9 +130,9 @@
                                             <?php echo $res->region; ?>
                                      </td>
                                     <td>
-                                        <a id="edit" href="/edit_organisation?id=<?php echo $res->id; ?>" />
+                                        <a id="edit" href="/edit_organisation?id=<?php echo $res->id; ?>&fieldStr={{$fieldStr}}" />
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                        <a id="delete" href="/delete_organisation?id=<?php echo $res->id; ?>" />
+                                        <a id="delete" href="/delete_organisation?id=<?php echo $res->id; ?>&fieldStr={{$fieldStr}}" />
                                             <i class="fa fa-trash-o offset-md-3" aria-hidden="true"></i></a>
                                         <!-- Modal -->
                                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
@@ -161,8 +161,8 @@
                         </br><button onclick="exportCSV2()" type="button" class="btn btn-primary" role="button">Export</a>
                     </div>
             </div>
+            {{ $results2->appends(['fieldStr' =>$fieldStr])->links() }}
             @endif
-            
         </div>
        </from>
       </div>
