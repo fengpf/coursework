@@ -14,7 +14,7 @@ return [
     */
 
     'default' => env('DB_CONNECTION', 'mysql'),
-    'sql_debug' => 1, //为1输出所有执行的sql语句
+    'sql_debug' => 0, //为1输出所有执行的sql语句
     /*
     |--------------------------------------------------------------------------
     | Database Connections
@@ -41,11 +41,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),//sqld-gz.bcehost.com
+            'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'work'),//nxFfKkoeArdjgdXhkssY
-            'username' => env('DB_USERNAME', 'root'),//4f5b3cbbff0640f68636670a6ef4b364
-            'password' => env('DB_PASSWORD', 'root'),//d02c1fadc43f42dc8aab6f7fd3098322
+            'database' => env('DB_DATABASE', 'work'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', 'root'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
