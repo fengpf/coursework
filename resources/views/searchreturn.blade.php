@@ -100,6 +100,7 @@
                             <th>Organisation</th>
                             <th>Department Level 1</th>
                             <th>Department Level 2</th>
+                            <th>Action</th>
                         </tr>
                 </thead>
 
