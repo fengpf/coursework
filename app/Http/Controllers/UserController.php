@@ -130,7 +130,7 @@ class UserController extends Controller
         $id=$request->get('id');
         $user = DB::table('user')->where('id', $id)->first();
         $loginUser = $this->getUser();
-        if ($loginUser->type >= $user->type){
+        if ($loginUser->type <= $user->type){
             session::flash('message', "Same level user can not be delete!");
             return redirect()->action('UserController@admin_user');
         }
@@ -150,7 +150,7 @@ class UserController extends Controller
         $id=$request->get('id');
         $user = DB::table('user')->where('id', $id)->first();
         $loginUser = $this->getUser();
-        if ($loginUser->type >= $user->type){
+        if ($loginUser->type <= $user->type){
             session::flash('message', "Same level user can not be edit!");
             return redirect()->action('UserController@admin_user');
         }
