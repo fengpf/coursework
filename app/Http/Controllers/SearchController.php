@@ -63,7 +63,7 @@ class SearchController extends Controller
     
                $field = $val['key'];
                if (in_array($val['key'], 
-                  ['organisation', 'schoollowerage', 'schoolhigherage', 'schoolURN'])) {
+                  ['orgType', 'organisation', 'schoollowerage', 'schoolhigherage', 'schoolURN'])) {
                   if($val['key'] == 'organisation') {
                      $field = 'name';
                   }
@@ -71,7 +71,7 @@ class SearchController extends Controller
                 //   dump($val['key']);
                   $queryOrg = true;
                } elseif (in_array($val['key'], 
-                   ['professionalinterests', 'country', 'region', 'notes'])) {
+                   ['professionalInterest', 'country', 'region', 'notes'])) {
                   $this->setWhere($field, $entry, $noentry, $condition, $handle);
                   $this->setWhere($field, $entry, $noentry, $condition, $handle2);
                 //   dump($val['key']);

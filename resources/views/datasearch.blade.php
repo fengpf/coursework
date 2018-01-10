@@ -221,15 +221,15 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-row" id="professionalinterests">
+                <div class="form-row" id="professionalInterest">
                     <label class="col-sm-2">
                         </br>Professional Interests
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="professionalinterests">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="professionalInterest">
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="professionalinterests">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="professionalInterest">
                     </label>
                     <div class="col-sm-3 ">
                         </br><input  name="entry" class="form-control form-control-sm col-sm-12 offset-sm-3">
@@ -284,12 +284,12 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-row" id="departmentlevel2">
+                <div class="form-row" id="dapartmentLevel2">
                     <label class="col-sm-2">
                         </br>Department Level 2
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="departmentlevel2">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="dapartmentLevel2">
                     </label>
                     <div class="col-sm-3 offset-sm-1">
                         </br><input  name="entry" class="form-control form-control-sm col-sm-12 offset-sm-3">
@@ -304,15 +304,15 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-row" id="orgtype">
+                <div class="form-row" id="orgType">
                     <label class="col-sm-2">
                         </br>Org Type
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="orgtype">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="orgType">
                     </label>
                     <div class="col-sm-3 offset-sm-1">
-                        </br><select name="entry" name="entry" class="chosen-select "  multiple  style="width:180px;">
+                        </br><select name="entry" name="entry" class="chosen-select "  multiple>
                             <option value="banks">Banks</option>
                             <option value="central government">Central Government</option>
                             <option value="charity/voluntary(philanthropic)">Charity/Voluntary(Philanthropic)</option>
@@ -433,12 +433,12 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-row" id="biography">
+                <div class="form-row" id="biographyText">
                     <label class="col-sm-2">
                         </br>Biography
                     </label>
                     <label class=" text-center col-sm-1">
-                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="biography">
+                        </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="biographyText">
                     </label>
                     <div class="col-sm-3 offset-sm-1">
                         </br><input name="entry" class="form-control form-control-sm col-sm-12 offset-sm-3">
