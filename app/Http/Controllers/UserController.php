@@ -42,6 +42,13 @@ class UserController extends Controller
         $user->email = trim($request->email);
         $user->password = sha1(trim($request->password));
         $user->type = trim($request->userlevel);
+
+        $loginUser = $this->getUser();
+        if ( ($loginUser->type == 1) &&  ($loginUser->type < $user->type)){
+            session::flash('message', "Admin can only add common user!");
+            return redirect()->action('UserController@admin_user');
+        }
+
         if (trim($request->active)=='on'){
             $user->active = 1;
         }else{
@@ -61,8 +68,6 @@ class UserController extends Controller
             default:
                 break;
         }
-        // echo "<pre>";
-        // print_r($user);
         $user->save();
         $report = new Report;
         $report->add_report($report, 1, 0, 0, $this->getMid());
