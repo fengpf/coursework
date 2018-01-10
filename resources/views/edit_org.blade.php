@@ -45,26 +45,45 @@
         
               <div class="form-row">
                 <div class="col-sm-6">
-                    <label ></br>Organisation type</label>
+                    <label ></br>OrgType</label>
                     <input name="orgType" value="<?php echo $org->orgType; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
                 </div>
               </div>
             
+              <div class="form-row">
+                  <div class="col-sm-6">
+                      <label ></br>Schoollowerage</label>
+                      <input name="schoolLowerAge" value="<?php echo $org->schoolLowerAge; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                  </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-sm-6">
+                        <label ></br>Schoolhigherage</label>
+                        <input name="schoolHigherAge" value="<?php echo $org->schoolHigherAge; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                    </div>
+                  </div>
 
               <div class="form-row">
                 <div class="col-sm-6">
-                    <label ></br>interestSectorAreas</label>
-                    <input name="interestSectorAreas" value="<?php echo $org->interestSectorAreas; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                    <label ></br>SchoolURN</label>
+                    <input name="schoolURN" value="<?php echo $org->schoolURN; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
                 </div>
               </div>
-              
-
+             
               <div class="form-row">
                 <div class="col-sm-6">
-                    <label ></br>twitter</label>
-                    <input name="twitter" value="<?php echo $org->twitter; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                    <label ></br>Country</label>
+                    <input name="country" value="<?php echo $org->country; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
                 </div> 
               </div>
+
+              <div class="form-row">
+                  <div class="col-sm-6">
+                      <label ></br>Region</label>
+                      <input name="region" value="<?php echo $org->region; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                  </div> 
+                </div>
               
               </div>
               </br>

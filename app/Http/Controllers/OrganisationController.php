@@ -125,8 +125,11 @@ class OrganisationController extends Controller
         $id = trim($request->id);
         $data['name'] = trim($request->name);
         $data['orgType']  = trim($request->orgType);
-        $data['interestSectorAreas']  = trim($request->interestSectorAreas);
-        $data['twitter']  = trim($request->twitter);
+        $data['schoolLowerAge']  = trim($request->schoolLowerAge);
+        $data['schoolHigherAge']  = trim($request->schoolHigherAge);
+        $data['schoolURN']  = trim($request->schoolURN);
+        $data['country']  = trim($request->country);
+        $data['region']  = trim($request->region);
         $res=$organisation->where("id", $id)->update($data);
         if ($res) {
             $report = new Report;
