@@ -55,6 +55,7 @@ class ContactController extends Controller
             $data[$k]['personType']=$request->personType[$k];
             $data[$k]['organisation']=$request->organisation[$k];
             $data[$k]['departmentLevel1']=$request->departmentLevel1[$k];
+            $data[$k]['dapartmentLevel2']=$request->dapartmentLevel2[$k];
             $data[$k]['linkedln']=$request->linkedln[$k];
             $data[$k]['professionalInterest']=$request->professionalInterest[$k];
             $data[$k]['biographyText']=$request->biographyText[$k];
@@ -96,7 +97,7 @@ class ContactController extends Controller
         $contact->personType = trim($request->personType);
         $contact->organisation = trim($request->organisation);
         $contact->departmentLevel1 = trim($request->departmentLevel1);
-        // $contact->departmentLevel2 = trim($request->departmentLevel2);
+        $contact->dapartmentLevel2 = trim($request->dapartmentLevel2);
         $contact->postcode = trim($request->postcode);
         $contact->region = trim($request->region);
         $contact->country = trim($request->country);

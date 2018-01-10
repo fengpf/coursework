@@ -82,6 +82,7 @@
                                 <th>PersonType</th>
                                 <th>Organisation</th>
                                 <th>DepartmentLevel1</th>
+                                <th>DepartmentLevel2</th>
                                 <th>Postcode</th>
                                 <th>Region</th>
                                 <th>Country</th>
@@ -231,6 +232,7 @@
               "personType",
               "organisation",
               "departmentLevel1",
+              "dapartmentLevel2",
               "postcode",
               "region",
               "country",
@@ -253,6 +255,7 @@
             $("input[name=csv_file]").csv2arr(function(arr){
               var tblStr = "";
               $.each(arr, function(i, line){
+                console.log(line);
                 if(i!=0 && i<11){
                     tblStr += "<tr>";
                     $.each(line, function(j, cell){
