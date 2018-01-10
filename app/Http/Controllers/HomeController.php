@@ -25,6 +25,7 @@ class HomeController extends Controller
                     'user' => $this->getUser()
                 ]);
         } else {
+            session::flash('message', "please login first!");
             return view('login');
         }
     }
@@ -34,39 +35,33 @@ class HomeController extends Controller
       
         $email = $request->email;
         $password = $request->password;
-//         echo $password;die;
-        // echo sha1($password);die;
-//        print_r(DB::table('user')->where('lname', 'admin')->first());die;
         $user = DB::table('user')
             ->where([
                 ['email', $email],
                 ['password', sha1($password)]
             ])->first();
-//        dd($user);die;
+        if ($user && $user->active == 0) {
+            session::flash('message', "you are not active!");
+            return view('login');
+        }        
         if ($user && $user->type == 2) {
             $superadmin_id = $user->id;
             $request->session()->push('superadmin_login', true);
             $request->session()->push('superadmin_id', $superadmin_id);
-//             var_dump($request->session()->get('superadmin_login'));die;
-            return \redirect()->to('/home');
-
+            return redirect()->to('/home');
         } else {
             if ($user && $user->type == 1) {
                 $admin_id = $user->id;
                 $admin_login = TRUE;
-
                 $request->session()->push('admin_id', $admin_id);
                 $request->session()->push('admin_login', $admin_login);
-
                 return redirect()->action('HomeController@home');
             } else {
                 if ($user) {
                     $id = $user->id;
                     $user_login = TRUE;
-
                     $request->session()->push('user_id', $id);
                     $request->session()->push('user_login', $user_login);
-
                     return redirect()->action('HomeController@home');
                 } else {
                     $request->session()->flash('message', 'Invalid Email/Password');

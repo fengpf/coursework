@@ -82,11 +82,12 @@
                             <label></br>User Level</label>
                         </div>
                         <div class="col-md-6">
-                            </br> <select name="type" aria-controls="dataTable" class="form-control form-control-sm">
-                                        <option value="0" "<?php if($user->type==0) {echo "selected = 'selected'";} ?> " >User</option>
-                                        <option value="1" "<?php if($user->type==1) {echo "selected = 'selected'";} ?> ">Admin</option>
-                                        <option value="2" "<?php if($user->type==2) {echo "selected = 'selected'";} ?> ">SuperAdmin</option>
-                                    </select>
+                            </br> 
+                            <select name="type" aria-controls="dataTable" class="form-control form-control-sm">
+                                        <option value="0" <?php if(($user->type!=1) && ($user->type!=2)) {echo "selected = 'selected'";} ?> >User</option>
+                                        <option value="1" <?php if($user->type==1) {echo "selected = 'selected'";} ?> >Admin</option>
+                                        <option value="2" <?php if($user->type==2) {echo "selected = 'selected'";} ?> >SuperAdmin</option>
+                            </select>
                         </div>
                 </div>
 

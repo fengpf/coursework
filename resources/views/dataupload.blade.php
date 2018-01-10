@@ -64,6 +64,7 @@
 
              <div id="con" class="table-responsive">
                 <form action="<?php echo url('/'); ?>/batchadd_contact" method="post">
+                    <input type="hidden" name="table" value="contact" />
                      <table class='table table-bordered' width='100%' cellspacing='0'>
                          <thead>
                              <tr>
@@ -104,6 +105,7 @@
 
             <div id="org" class="table-responsive">
              <form action="<?php echo url('/'); ?>/batchadd_organisation" method="post">
+                  <input type="hidden" name="table" value="organisation" />
                   <table class='table table-bordered' width='100%' cellspacing='0'>
                       <thead>
                           <tr>
@@ -251,7 +253,7 @@
             $("input[name=csv_file]").csv2arr(function(arr){
               var tblStr = "";
               $.each(arr, function(i, line){
-                if(i!=0){
+                if(i!=0 && i<11){
                     tblStr += "<tr>";
                     $.each(line, function(j, cell){
                       tblStr += "<td width='120%'><input type='text' name="+con[j]+"[]' value="+cell+ "></td>";
@@ -268,7 +270,7 @@
             $("input[name=csv_file]").csv2arr(function(arr){
               var tblStr = "";
               $.each(arr, function(i, line){
-                if(i!=0){
+                if(i!=0 && i<11){
                       tblStr += "<tr>";
                       $.each(line, function(j, cell){
                         tblStr += "<td width='120%'><input type='text' name="+org[j]+"[]' value="+cell+ "></td>";

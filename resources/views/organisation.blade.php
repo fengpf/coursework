@@ -42,6 +42,14 @@
       <form action="<?php echo url('/'); ?>/add_organisation" method="post">
        <?php echo method_field('POST'); ?>
         <?php echo csrf_field(); ?>
+
+        @if(Session::has('message'))                                            
+        <div class="alert alert-success">                                          
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{Session::get('message')}}
+        </div>  
+        @endif
+
         <div class="card-body">
           <div class="table-responsive">
               <div class="form-row">
@@ -155,7 +163,7 @@
               
               </div>
               </br>
-             <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
+             <button type="submit" class="btn btn-primary">
                 Submit
              </button>
           

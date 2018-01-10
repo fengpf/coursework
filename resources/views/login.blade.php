@@ -21,11 +21,12 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
-      <!-- <?php
-          if(Session::has('message')){
-              echo Session::get('message');
-          }
-      ?>-->
+          @if(Session::has('message'))                                            
+          <div class="alert alert-success">                                          
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              {{Session::get('message')}}
+          </div>  
+          @endif
         <form action="<?php echo url('/'); ?>/login" method="post">
           <div class="form-group">
             <label for="email">Email address</label>

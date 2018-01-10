@@ -40,6 +40,11 @@ class OrganisationController extends Controller
             session::flash('message', "Session expired, login required");
             return redirect()->action('HomeController@index');
         }
+        // dump($request, !isset($request->name));die;
+        if (!isset($request->name) && !isset($request->orgType)) {
+            session::flash('message', "please select organisation upload!");
+            redirect()->action('DatauploadController@Index');
+        }
         $data=[];
         foreach($request->name as $k=>$v){
             $data[$k]['name']=$v;
@@ -56,11 +61,10 @@ class OrganisationController extends Controller
             $data[$k]['created_at']=date('Y-m-d H:i:s');
             $data[$k]['updated_at']=date('Y-m-d H:i:s');
         }
-        // dump($data);die;
         DB::table('organisation')->insert($data);
-        session::flash('message', "Organisation import successfully");
         $report = new Report;
         $report->add_report($report, 1, 0, 0, $this->getMid());
+        session::flash('message', "Organisation import successfully");
         return redirect()->action('DatauploadController@Index');
     }
     
@@ -70,8 +74,6 @@ class OrganisationController extends Controller
             return redirect()->action('HomeController@index');
         }
         $organisation = new Organisation;
-        $id = trim($request->id);
-        dump($request->name[0]);die;
         $organisation->name = trim($request->name);
         $organisation->orgType = trim($request->orgType);
         $organisation->interestSectorAreas = trim($request->interestSectorAreas);
@@ -83,13 +85,10 @@ class OrganisationController extends Controller
         $organisation->postcode = trim($request->postcode);
         $organisation->region = trim($request->region);
         $organisation->country = trim($request->country);
-        // $organisation->entry_time = date('Y-m-d H:i:s');
-        // echo "<pre>";
-        // print_r($organisation);
         $organisation->save();
-        session::flash('message', "Organisation added successfully");
         $report = new Report;
         $report->add_report($report, 1, 0, 0, $this->getMid());
+        session::flash('message', "Organisation added successfully");
         return redirect()->action('OrganisationController@organisation_form');
     }
        
