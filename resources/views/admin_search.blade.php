@@ -18,6 +18,9 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
   <link href="css/chosen.css" rel="stylesheet">
+  <style type="text/css">
+        #recordstatus .chosen-select  {padding-left:100px;}
+  </style>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -169,8 +172,7 @@
                     </label>
                     </div>
                     <div class="col-sm-3 offset-sm-1 ">
-                        </br>
-                        <select name="entry" class="chosen-select "  multiple onchange="" style="width:180px;">
+                        </br><select name="entry" class="chosen-select "  multiple onchange="">
                             <option value="deceased">Deceased</option>
                             <option value="left-retired">Left-Retired</option>
                             <option value="left-other">Left-Other</option>
