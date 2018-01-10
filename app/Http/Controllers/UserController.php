@@ -70,7 +70,6 @@ class UserController extends Controller
 
     }
     
-    
     public function view_user($id){
         if(!$this->check_permission()){
             session::flash('message', "Permission denied or session expired");
@@ -131,12 +130,11 @@ class UserController extends Controller
         $id=$request->get('id');
         $user = DB::table('user')->where('id', $id)->first();
         $loginUser = $this->getUser();
-        // if ($user->type == $loginUser->type){
-        //     session::flash('message', "login user can not be delete");
-        //     return redirect()->action('UserController@admin_user');
-        // }
+        if ($loginUser->type >= $user->type){
+            session::flash('message', "Same level user can not be delete!");
+            return redirect()->action('UserController@admin_user');
+        }
         $res = DB::delete('delete from user where id = ?',[$id]);
-         // var_dump($res);
         if ($res) {
             $report = new Report;
             $report->add_report($report, 0, 0, 1, $this->getMid());
@@ -152,10 +150,10 @@ class UserController extends Controller
         $id=$request->get('id');
         $user = DB::table('user')->where('id', $id)->first();
         $loginUser = $this->getUser();
-        // if ($user->type == $loginUser->type){
-        //     session::flash('message', "Same level user can not edit");
-        //     return redirect()->action('UserController@admin_user');
-        // }
+        if ($loginUser->type >= $user->type){
+            session::flash('message', "Same level user can not be edit!");
+            return redirect()->action('UserController@admin_user');
+        }
         return view('useredit', [
             'user' => $user,
             'name' =>$this->getUserName()
@@ -165,5 +163,5 @@ class UserController extends Controller
     public  function  admin_search(){
         return view('admin_search', ['name' => $this->getUserName()]);
     }
-    
+
 }
