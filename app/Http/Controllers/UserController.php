@@ -102,6 +102,13 @@ class UserController extends Controller
         $data['email'] = trim($request->email);
         $data['password'] = sha1(trim($request->password));
         $data['type'] = intval(trim($request->type));
+
+        $loginUser = $this->getUser();
+        if ( ($loginUser->type == 1) &&  ($loginUser->type < $request->type) ){
+            session::flash('message', "You are only admin user!");
+            return redirect()->action('UserController@admin_user');
+        }
+
         if (trim($request->active)=='on'){
             $data['active'] = 1;
         }else{
@@ -147,7 +154,7 @@ class UserController extends Controller
             session::flash('message', "You are only common user!");
             return redirect()->action('UserController@admin_user');
         }
-        if ( ($loginUser->type == 1) &&  ($loginUser->type <= $user->type) ){
+        if ( ($loginUser->type == 1) &&  ($loginUser->type < $user->type) ){
             session::flash('message', "You are only admin user!");
             return redirect()->action('UserController@admin_user');
         }
@@ -171,7 +178,7 @@ class UserController extends Controller
             session::flash('message', "You are only common user!");
             return redirect()->action('UserController@admin_user');
         }
-        if ( ($loginUser->type == 1) &&  ($loginUser->type <= $user->type) ){
+        if ( ($loginUser->type == 1) &&  ($loginUser->type < $user->type) ){
             session::flash('message', "You are only admin user!");
             return redirect()->action('UserController@admin_user');
         }
