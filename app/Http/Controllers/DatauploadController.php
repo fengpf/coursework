@@ -164,7 +164,7 @@ class DatauploadController extends Controller
         }
         return view('dailyreport',[
             'report' => $temp2,
-            'name' =>$this->getUserName()
+            'name' =>$user->fname
         ]);
     }
 
