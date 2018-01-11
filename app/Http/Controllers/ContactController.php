@@ -38,6 +38,11 @@ class ContactController extends Controller
             session::flash('message', "Session expired, login required");
             return redirect()->action('HomeController@index');
         }
+        // dump($request);die;
+        if (isset($request->recordType[1]) && ($request->recordType[0]=='Name')) {
+            session::flash('message', "please select contact table data to upload!");
+            return redirect()->action('DatauploadController@Index');
+        }
         $data=[];
         foreach($request->recordType as $k=>$v){
             $data[$k]['recordType']=$v;
@@ -46,9 +51,9 @@ class ContactController extends Controller
             $data[$k]['fname']=$request->fname[$k];
             $data[$k]['lname']=$request->lname[$k];
             $data[$k]['title']=$request->title[$k];
+            $data[$k]['email']=$request->email[$k];
             $data[$k]['jobtitle']=$request->jobtitle[$k];
 
-            $data[$k]['email']=$request->email[$k];
             $data[$k]['telephone']=$request->telephone[$k];
             $data[$k]['telephone2']=$request->telephone2[$k];
             $data[$k]['mobile']=$request->mobile[$k];
@@ -56,14 +61,16 @@ class ContactController extends Controller
             $data[$k]['organisation']=$request->organisation[$k];
             $data[$k]['departmentLevel1']=$request->departmentLevel1[$k];
             $data[$k]['dapartmentLevel2']=$request->dapartmentLevel2[$k];
-            $data[$k]['linkedln']=$request->linkedln[$k];
-            $data[$k]['professionalInterest']=$request->professionalInterest[$k];
-            $data[$k]['biographyText']=$request->biographyText[$k];
+           
 
-            $data[$k]['notes']=$request->notes[$k];
             $data[$k]['postcode']=empty($request->postcode[$k])?0:0;
             $data[$k]['region']=empty($request->region[$k])?'':'';
             $data[$k]['country']=empty($request->country[$k])?'':'';
+            $data[$k]['linkedln']=$request->linkedln[$k];
+            $data[$k]['professionalInterest']=$request->professionalInterest[$k];
+            $data[$k]['biographyText']=$request->biographyText[$k];
+            $data[$k]['notes']=$request->notes[$k];
+
             $data[$k]['created_at']=date('Y-m-d H:i:s');
             $data[$k]['updated_at']=date('Y-m-d H:i:s');
             $data[$k]['entry_time']=date('Y-m-d H:i:s');
@@ -143,15 +150,32 @@ class ContactController extends Controller
         }
         $contact = new Contact;
         $id = trim($request->id);
-        $data['instruction'] = trim($request->instruction);
-        $data['title']  = trim($request->title);
+        $data['recordType'] = trim($request->recordType);
+        $data['recordStatus']  = trim($request->recordStatus);
+        $data['instruction']  = trim($request->instruction);
         $data['fname']  = trim($request->fname);
         $data['lname']  = trim($request->lname);
-        $data['jobtitle']  = trim($request->jobtitle);
+        $data['title']  = trim($request->title);
         $data['email']  = trim($request->email);
+        $data['jobtitle']  = trim($request->jobtitle);
+
+        $data['telephone'] = trim($request->telephone);
+        $data['telephone2']  = trim($request->telephone2);
+        $data['mobile']  = trim($request->mobile);
+        $data['personType']  = trim($request->personType);
         $data['organisation']  = trim($request->organisation);
         $data['departmentLevel1']  = trim($request->departmentLevel1);
         $data['dapartmentLevel2']  = trim($request->dapartmentLevel2);
+
+        $data['postcode'] = trim($request->postcode);
+        $data['region']  = trim($request->region);
+        $data['country']  = trim($request->country);
+        $data['linkedln']  = trim($request->linkedln);
+        $data['professionalInterest']  = trim($request->professionalInterest);
+        $data['biographyText']  = trim($request->biographyText);
+        $data['notes']  = trim($request->notes);
+
+        $data['updated_at']=date('Y-m-d H:i:s');
         $res=$contact->where("id", $id)->update($data);
         if ($res) {
             $report = new Report;

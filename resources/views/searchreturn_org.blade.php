@@ -65,7 +65,8 @@
                                         <?php echo $f['key']; ?>
                                     </td>
                                     <td>
-                                         <?php echo $f['entry']. ' ' .$f['noentry']; ?>
+                                            Entry[<?php echo $f['entry']; ?>]</br>
+                                            No Entry[<?php echo $f['noentry']; ?>]
                                      </td>
                                      <td>
                                             <?php echo $f['condition']; ?>
@@ -88,47 +89,39 @@
             </label></br>
             <div class="table-responsive">
                  <table class="table table-bordered" id="search-org" width="100%" cellspacing="0">
+                   
                     <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>OrgType</th>
-                                <th>Schoollowerage</th>
-                                <th>Schoolhigherage</th>
-                                <th>SchoolURN</th>
-                                <th>Country</th>
+                                <th>OrganisationType</th>
+                                <th>InterestsSectorAreas</th>
+                                <th>PostCode</th>
                                 <th>Region</th>
+                                <th>Country</th>
+                                <th>Twitter</th>
+                                <th>SchoolLowerAge</th>
+                                <th>SchoolHigherAge</th>
+                                <th>SchoolURNSimilar</th>
+                                <th>Notes</th>
                                 <th>Action</th>
                             </tr>
                     </thead>
-                    
                     <tbody>
                           <?php foreach($results2 as $res) { ?>
                                 <tr>
-                                    <td>
-                                       <?php echo $res->id; ?>
-                                    </td>
-                                    <td>
-                                       <?php echo $res->name; ?>
-                                    </td>
-                                    <td>
-                                       <?php echo $res->orgType; ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $res->schoolLowerAge; ?>
-                                    </td>
-                                    <td>
-                                       <?php echo $res->schoolHigherAge; ?>
-                                   </td>
-                                   <td>
-                                        <?php echo $res->schoolURN; ?>
-                                    </td>
-                                    <td>
-                                            <?php echo $res->country; ?>
-                                     </td>
-                                    <td>
-                                            <?php echo $res->region; ?>
-                                     </td>
+                                    <td><?php echo $res->id; ?></td>
+                                    <td><?php echo $res->name; ?></td>
+                                    <td><?php echo $res->orgType; ?></td>
+                                    <td><?php echo $res->interestSectorAreas; ?></td>
+                                    <td><?php echo $res->postcode; ?></td>
+                                    <td><?php echo $res->region; ?></td>
+                                    <td><?php echo $res->country; ?></td>
+                                    <td><?php echo $res->twitter; ?></td>
+                                    <td><?php echo $res->schoolLowerAge; ?></td>
+                                    <td><?php echo $res->schoolHigherAge; ?></td>
+                                    <td><?php echo $res->schoolURN; ?></td>
+                                    <td><?php echo $res->notes; ?></td>
                                     <td>
                                         <a id="edit" href="/edit_organisation?id=<?php echo $res->id; ?>&fieldStr={{$fieldStr}}" />
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>

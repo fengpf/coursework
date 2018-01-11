@@ -360,7 +360,7 @@
                         </br><input class="form-check-input position-static" type="checkbox" name="blankCheckbox" value="country">
                     </label>
                     <div class="col-sm-3 ">
-                        </br><input name="entry" type="text" class="form-control form-control-sm offset-sm-3" autocomplete="off" data-provide="typeahead" data-source='["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic (CAR)","Chad","Chile","China","Colombia","Comoros","Democratic Republic of the Congo","Republic of the Congo","Costa Rica","Cote d‘Ivoire",
+                        </br><input name="entry" type="text" autocomplete="off" class="form-control form-control-sm offset-sm-3" data-provide="typeahead" data-source='["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic (CAR)","Chad","Chile","China","Colombia","Comoros","Democratic Republic of the Congo","Republic of the Congo","Costa Rica","Cote d‘Ivoire",
                             "Croatia","Cuba","Cyprus","Czech Republic","Denmark", "Djibouti", "Dominica","Dominican Republic","Ecuador","Egypt","El Salvador",
                             "Equatorial Guinea","Eritrea","Estonia","Ethiopia","Fiji","Finland",
                             "France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada",
@@ -569,7 +569,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="/logout">Logout</a>
           </div>
         </div>
       </div>
@@ -592,9 +592,13 @@
     <script src="js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
     <script type="text/javascript" src="js/csv/tableExport.js"></script>
+    <script src="js/bootstrap3-typeahead.js"></script>
     <script>
+
+        //$('#country input').typeahead()
+       
+            
         $('.chosen-select').chosen({width:"100%"} );
         $('.chosen-select').on('change', function(e, params) {
             console.log(params.selected);            

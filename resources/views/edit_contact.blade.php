@@ -32,7 +32,6 @@
       <form action="<?php echo url('/'); ?>/update_contact" method="post">
        <?php echo method_field('POST'); ?>
         <?php echo csrf_field(); ?>
-        <input type="hidden"  name="id" value="<?php echo $con->id; ?>" >
         <input type="hidden" name="fieldStr" value="{{$fieldStr}}" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
        
         @if(Session::has('message'))                                            
@@ -44,13 +43,49 @@
 
         <div class="card-body">
           <div class="table-responsive">
+              
               <div class="form-row">
                   <div class="col-sm-6">
-                      <label for="InputName"></br>Instruction</label>
-                      <input name="instruction" value="<?php echo $con->instruction; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                      <label for="InputName"></br>ID</label>
+                      <?php echo $con->id; ?><input type="hidden"  name="id" value="<?php echo $con->id; ?>" >
+                 </div>
+              </div>
+
+              <div class="form-row">
+                  <div class="col-sm-6">
+                      <label for="InputName"></br>RecordType</label>
+                      <input name="recordType" value="<?php echo $con->recordType; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
                  </div>
               </div>
         
+              <div class="form-row">
+                <div class="col-sm-6">
+                    <label ></br>RecordStatus</label>
+                    <input name="recordStatus" value="<?php echo $con->recordStatus; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-sm-6">
+                    <label ></br>Instruction</label>
+                    <input name="instruction" value="<?php echo $con->instruction; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                </div> 
+            </div>
+
+            <div class="form-row">
+                  <div class="col-sm-6">
+                      <label ></br>FirstName</label>
+                      <input name="fname" value="<?php echo $con->fname;?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                  </div> 
+            </div>
+
+              <div class="form-row">
+                <div class="col-sm-6">
+                    <label ></br>LastName</label>
+                    <input name="lname" value="<?php echo $con->lname; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                </div>
+              </div>
+              
               <div class="form-row">
                 <div class="col-sm-6">
                     <label ></br>Title</label>
@@ -60,54 +95,105 @@
 
               <div class="form-row">
                 <div class="col-sm-6">
-                    <label ></br>First Name</label>
-                    <input name="fname" value="<?php echo $con->fname; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
-                </div> 
-            </div>
-
-            <div class="form-row">
-                  <div class="col-sm-6">
-                      <label ></br>Last Name</label>
-                      <input name="lname" value="<?php echo $con->lname;?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
-                  </div> 
-            </div>
-
-              <div class="form-row">
-                <div class="col-sm-6">
-                    <label ></br>Job Title</label>
-                    <input name="jobtitle" value="<?php echo $con->jobtitle; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
-                </div>
-              </div>
-              
-              <div class="form-row">
-                <div class="col-sm-6">
                     <label ></br>Email</label>
                     <input name="email" value="<?php echo $con->email; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                </div> 
+              </div>
+
+              <div class="form-row">
+                <div class="col-sm-6">
+                    <label ></br>JobTitle</label>
+                    <input name="jobtitle" value="<?php echo $con->jobtitle; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                </div> 
+              </div>
+
+              <div class="form-row">
+                <div class="col-sm-6">
+                    <label ></br>Telephone</label>
+                    <input name="telephone" value="<?php echo $con->telephone; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                </div> 
+              </div>
+              <div class="form-row">
+                  <div class="col-sm-6">
+                      <label ></br>Telephone2</label>
+                      <input name="telephone2" value="<?php echo $con->telephone2; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                  </div> 
+              </div>
+
+              <div class="form-row">
+                  <div class="col-sm-6">
+                      <label ></br>Mobile</label>
+                      <input name="mobile" value="<?php echo $con->mobile; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                  </div> 
                 </div>
-              </div>
+                <div class="form-row">
+                    <div class="col-sm-6">
+                        <label ></br>PersonType</label>
+                        <input name="personType" value="<?php echo $con->personType; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                    </div> 
+                </div>
 
-              <div class="form-row">
-                <div class="col-sm-6">
-                    <label ></br>Organisation</label>
-                    <input name="organisation" value="<?php echo $con->organisation; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
-                </div> 
-              </div>
+                <div class="form-row">
+                    <div class="col-sm-6">
+                        <label ></br>Organisation</label>
+                        <input name="organisation" value="<?php echo $con->organisation; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                    </div> 
+                  </div>
+                  <div class="form-row">
+                      <div class="col-sm-6">
+                          <label ></br>DepartmentLevel1</label>
+                          <input name="departmentLevel1" value="<?php echo $con->departmentLevel1; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                      </div> 
+                  </div>
+                  <div class="form-row">
+                      <div class="col-sm-6">
+                          <label ></br>DepartmentLevel2</label>
+                          <input name="dapartmentLevel2" value="<?php echo $con->dapartmentLevel2; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                      </div> 
+                  </div>
 
-              <div class="form-row">
-                <div class="col-sm-6">
-                    <label ></br>Department Level 1</label>
-                    <input name="departmentLevel1" value="<?php echo $con->departmentLevel1; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
-                </div> 
-              </div>
-
-              <div class="form-row">
-                <div class="col-sm-6">
-                    <label ></br>Department Level 2</label>
-                    <input name="dapartmentLevel2" value="<?php echo $con->dapartmentLevel2; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
-                </div> 
-              </div>
-
-              
+                  <div class="form-row">
+                      <div class="col-sm-6">
+                          <label ></br>Postcode</label>
+                          <input name="postcode" value="<?php echo $con->postcode; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                      </div> 
+                  </div>
+                  <div class="form-row">
+                      <div class="col-sm-6">
+                          <label ></br>Region</label>
+                          <input name="region" value="<?php echo $con->region; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                      </div> 
+                  </div>
+                  <div class="form-row">
+                      <div class="col-sm-6">
+                          <label ></br>Country</label>
+                          <input name="country" value="<?php echo $con->country; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                      </div> 
+                  </div>
+                  <div class="form-row">
+                      <div class="col-sm-6">
+                          <label ></br>Linkedin</label>
+                          <input name="linkedln" value="<?php echo $con->linkedln; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                      </div> 
+                  </div>
+                  <div class="form-row">
+                      <div class="col-sm-6">
+                          <label ></br>ProfessionalInterest</label>
+                          <input name="professionalInterest" value="<?php echo $con->professionalInterest; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                      </div> 
+                  </div>
+                  <div class="form-row">
+                      <div class="col-sm-6">
+                          <label ></br>BiographyText</label>
+                          <input name="biographyText" value="<?php echo $con->biographyText; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                      </div> 
+                  </div>
+                  <div class="form-row">
+                      <div class="col-sm-6">
+                          <label ></br>Notes</label>
+                          <input name="notes" value="<?php echo $con->notes; ?>" class="form-control form-control-sm" id="InputName" type="text" aria-describedby="nameHelp" >
+                      </div> 
+                  </div>
               
               </div>
               </br>

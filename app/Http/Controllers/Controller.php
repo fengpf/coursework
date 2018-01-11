@@ -64,7 +64,7 @@ class Controller extends BaseController
         if (empty($user)) {
             return redirect()->action('HomeController@index');
         }
-        $name = $user->fname.$user->lname;
+        $name = $user->fname.' '.$user->lname;
         return $name;
     }
 

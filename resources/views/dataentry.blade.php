@@ -188,7 +188,7 @@
                  </div>
                 <div class="col-sm-6">
                       <label for="InputName"></br>Department Level 2</label>
-                      <input name="dapartmentLevel2"  class="form-control form-control-sm" id="InputName" type="text" >
+                      <input name="departmentLevel2"  class="form-control form-control-sm" id="InputName" type="text" >
                  </div>
              </div>
               
@@ -276,7 +276,7 @@
                 </div>
             </div>
               </br>
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
               Submit
           </button>
           

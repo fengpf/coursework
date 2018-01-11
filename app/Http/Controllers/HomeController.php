@@ -20,6 +20,11 @@ class HomeController extends Controller
         if ($request->session()->get('superadmin_login') == true 
             || $request->session()->get('admin_login') == true 
             || $request->session()->get('user_login') == true) {
+            // dump($this->getUser(), $request->session());die;
+                
+            if (empty($this->getUser())) {
+                return view('login');
+            }
             return view('index', [
                     'name' => $this->getUserName(),
                     'user' => $this->getUser()
@@ -35,6 +40,8 @@ class HomeController extends Controller
       
         $email = $request->email;
         $password = $request->password;
+        $request->session()->flush();
+        
         $user = DB::table('user')
             ->where([
                 ['email', $email],

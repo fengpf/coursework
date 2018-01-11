@@ -44,6 +44,10 @@ class UserController extends Controller
         $user->type = trim($request->userlevel);
 
         $loginUser = $this->getUser();
+        if ($loginUser->type == 0){
+            session::flash('message', "Common user can not add any user!");
+            return redirect()->action('UserController@admin_user');
+        }
         if ( ($loginUser->type == 1) &&  ($loginUser->type < $user->type)){
             session::flash('message', "Admin can only add common user!");
             return redirect()->action('UserController@admin_user');
@@ -135,8 +139,16 @@ class UserController extends Controller
         $id=$request->get('id');
         $user = DB::table('user')->where('id', $id)->first();
         $loginUser = $this->getUser();
-        if ($loginUser->type <= $user->type){
-            session::flash('message', "Same level user can not be delete!");
+        if ($loginUser->id == $id){
+            session::flash('message', "You can not delete yourself!");
+            return redirect()->action('UserController@admin_user');
+        }
+        if ($loginUser->type == 0){
+            session::flash('message', "You are only common user!");
+            return redirect()->action('UserController@admin_user');
+        }
+        if ( ($loginUser->type == 1) &&  ($loginUser->type <= $user->type) ){
+            session::flash('message', "You are only admin user!");
             return redirect()->action('UserController@admin_user');
         }
         $res = DB::delete('delete from user where id = ?',[$id]);
@@ -155,8 +167,12 @@ class UserController extends Controller
         $id=$request->get('id');
         $user = DB::table('user')->where('id', $id)->first();
         $loginUser = $this->getUser();
-        if ($loginUser->type <= $user->type){
-            session::flash('message', "Same level user can not be edit!");
+        if ($loginUser->type == 0){
+            session::flash('message', "You are only common user!");
+            return redirect()->action('UserController@admin_user');
+        }
+        if ( ($loginUser->type == 1) &&  ($loginUser->type <= $user->type) ){
+            session::flash('message', "You are only admin user!");
             return redirect()->action('UserController@admin_user');
         }
         return view('useredit', [

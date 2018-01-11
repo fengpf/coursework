@@ -65,7 +65,8 @@
                                         <?php echo $f['key']; ?>
                                     </td>
                                     <td>
-                                         <?php echo $f['entry']. ' ' .$f['noentry']; ?>
+                                            Entry[<?php echo $f['entry']; ?>]</br>
+                                            No Entry[<?php echo $f['noentry']; ?>]
                                      </td>
                                      <td>
                                             <?php echo $f['condition']; ?>
@@ -90,55 +91,63 @@
                 <table class="table table-bordered" id="search-contact" width="100%" cellspacing="0">
                 <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Instruction</th>
-                            <th>Title</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Job Title</th>
-                            <th>Email</th>
-                            <th>Organisation</th>
-                            <th>Department Level 1</th>
-                            <th>Department Level 2</th>
-                            <th>Action</th>
+                                <th>ID</th>
+                                <th>RecordType</th>
+                                <th>RecordStatus</th>
+                                <th>Instruction</th>
+                                <th>FirstName</th>
+                                <th>LastName</th>
+                                <th>Title</th>
+                                <th>Email</th>
+                                <th>JobTitle</th>
+                                <th>Telephone</th>
+                                <th>Telephone2</th>
+                                <th>Mobile</th>
+
+                                <th>PersonType</th>
+                                <th>Organisation</th>
+                                <th>DepartmentLevel1</th>
+                                <th>DepartmentLevel2</th>
+
+                                <th>Postcode</th>
+                                <th>Region</th>
+                                <th>Country</th>
+                                <th>Linkedin</th>
+                                <th>ProfessionalInterest</th>
+                                <th>BiographyText</th>
+                                <th>Notes</th>
+                                <th>Action</th>
                         </tr>
                 </thead>
 
                 <tbody>
                       <?php foreach($results as $res) { ?>
                           <tr>
-                              <td>
-                                 <?php echo $res->id; ?>
-                              </td>
-                              <td>
-                                    <?php echo $res->instruction; ?>
-                             </td>
-                              <td>
-                                 <?php echo $res->title; ?>
-                              </td>
-                              <td>
-                                 <?php echo $res->fname; ?>
-                              </td>
-                              <td>
-                                  <?php echo $res->lname; ?>
-                              </td>
-                              <td>
-                                  <?php echo $res->jobtitle; ?>
-                             </td>
-                             <td>
-                                    <?php echo $res->email; ?>
-                            </td>
+                              <td><?php echo $res->id; ?></td>
+                              <td><?php echo $res->recordType; ?></td>
+                              <td><?php echo $res->recordStatus; ?></td>
+                              <td><?php echo $res->instruction; ?></td>
+                              <td><?php echo $res->fname; ?></td>
+                              <td><?php echo $res->lname; ?></td>
+                              <td><?php echo $res->title; ?></td>
+                              <td><?php echo $res->email; ?></td>
+                              <td><?php echo $res->jobtitle; ?></td>
+                              <td><?php echo $res->telephone; ?></td>
+                              <td><?php echo $res->telephone2; ?></td>
+                              <td><?php echo $res->mobile; ?></td>
+                           
+                              <td><?php echo $res->personType; ?></td>
+                              <td><?php echo $res->organisation; ?></td>
+                              <td><?php echo $res->departmentLevel1; ?></td>
+                              <td><?php echo $res->dapartmentLevel2; ?></td>
+                              <td><?php echo $res->postcode; ?></td>
+                              <td><?php echo $res->region; ?></td>
+                              <td><?php echo $res->country; ?></td>
 
-                             <td>
-                                    <?php echo $res->organisation; ?>
-                            </td>
-                             <td>
-                                    <?php echo $res->departmentLevel1; ?>
-                             </td>
-                             <td>
-                                    <?php echo $res->dapartmentLevel2; ?>
-                             </td>
-        
+                              <td><?php echo $res->linkedln; ?></td>
+                              <td><?php echo $res->professionalInterest; ?></td>
+                              <td><?php echo $res->biographyText; ?></td>
+                              <td><?php echo $res->notes; ?></td>
                               <td>
                                   <a id="edit" href="/edit_contact?id=<?php echo $res->id; ?>&fieldStr={{$fieldStr}}" />
                                       <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>

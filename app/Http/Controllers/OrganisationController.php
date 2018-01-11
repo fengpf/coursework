@@ -40,10 +40,10 @@ class OrganisationController extends Controller
             session::flash('message', "Session expired, login required");
             return redirect()->action('HomeController@index');
         }
-        // dump($request, !isset($request->name));die;
-        if (!isset($request->name) && !isset($request->orgType)) {
-            session::flash('message', "please select organisation upload!");
-            redirect()->action('DatauploadController@Index');
+        // dump($request);die;
+        if (isset($request->name[0]) && ($request->name[0]=='RecordType')) {
+            session::flash('message', "please select organisation table data to upload!");
+            return redirect()->action('DatauploadController@Index');
         }
         $data=[];
         foreach($request->name as $k=>$v){
@@ -125,11 +125,16 @@ class OrganisationController extends Controller
         $id = trim($request->id);
         $data['name'] = trim($request->name);
         $data['orgType']  = trim($request->orgType);
+        $data['interestSectorAreas']  = trim($request->interestSectorAreas);
+        $data['twitter']  = trim($request->twitter);
         $data['schoolLowerAge']  = trim($request->schoolLowerAge);
         $data['schoolHigherAge']  = trim($request->schoolHigherAge);
         $data['schoolURN']  = trim($request->schoolURN);
+        $data['postcode']  = trim($request->postcode);
         $data['country']  = trim($request->country);
         $data['region']  = trim($request->region);
+        $data['notes']  = trim($request->notes);
+        $data['updated_at']=date('Y-m-d H:i:s');
         $res=$organisation->where("id", $id)->update($data);
         if ($res) {
             $report = new Report;

@@ -111,15 +111,15 @@
                       <thead>
                           <tr>
                               <th>Name</th>
-                              <th>Organisation type</th>
-                              <th>Interests and Sector Areas</th>
-                              <th>Post Code</th>
+                              <th>OrganisationType</th>
+                              <th>InterestsAndSectorAreas</th>
+                              <th>PostCode</th>
                               <th>Region</th>
                               <th>Country</th>
                               <th>Twitter</th>
-                              <th>School Lower Age</th>
-                              <th>School Higher Age</th>
-                              <th>School URN or Similar</th>
+                              <th>SchoolLowerAge</th>
+                              <th>SchoolHigherAge</th>
+                              <th>SchoolURNSimilar</th>
                               <th>Notes</th>
                           </tr>
                       </thead>
@@ -250,42 +250,46 @@
              alert("please select one table to upload!");
              return;
           }
-          
+          if (con_box && org_box) {
+            alert("only one table select to upload!");
+            return;
+          }
+          var idStr='';
+          var name={};
           if (con_box) {
-            $("input[name=csv_file]").csv2arr(function(arr){
-              var tblStr = "";
-              $.each(arr, function(i, line){
-                console.log(line);
-                if(i!=0 && i<11){
-                    tblStr += "<tr>";
-                    $.each(line, function(j, cell){
-                      tblStr += "<td width='120%'><input type='text' name="+con[j]+"[]' value="+cell+ "></td>";
-                    });
-                    tblStr += "</tr>";
-                 }
-              });
-              $("#con table tbody").append(tblStr);
-              $("#con").show();
-            });
+            idStr='con';
+            name=con;
           }
-
           if (org_box) {
-            $("input[name=csv_file]").csv2arr(function(arr){
-              var tblStr = "";
-              $.each(arr, function(i, line){
-                if(i!=0 && i<11){
-                      tblStr += "<tr>";
-                      $.each(line, function(j, cell){
-                        tblStr += "<td width='120%'><input type='text' name="+org[j]+"[]' value="+cell+ "></td>";
-                      });
-                      tblStr += "</tr>";
-                }
-              });
-              $("#org table tbody").append(tblStr);
-              $("#org").show();
-            });
+            idStr='org';
+            name=org;
           }
-          
+          $("input[name=csv_file]").csv2arr(function(arr){
+                var tblStr = "";
+                var tblStr2 = "";
+                $.each(arr, function(i, line){
+                    console.log(line);
+                    tblStr += "<tr id='fd'>";
+                    if(i==0){
+                        $.each(line, function(j, cell){
+                            tblStr += "<td width='100%'><input type='hidden' name="+name[j]+"[]' value="+cell+ "></td>";
+                        });
+                        tblStr += "</tr>";
+                    }
+                    tblStr2 += "<tr>";
+                    if((i>=1) && (i<11)){
+                        $.each(line, function(j, cell){
+                            tblStr2 += "<td width='100%'><input type='text' name="+name[j]+"[]' value="+cell+ "></td>";
+                        });
+                        tblStr2 += "</tr>";
+                    }
+                });
+                $("#"+idStr+" table tbody").append(tblStr);
+                $("#"+idStr+" table tbody").append(tblStr2);
+                $("#"+idStr).show();
+                var fd = document.getElementById("fd");
+                fd.style.display = 'none';
+         });
       }
     </script>
   </div>
